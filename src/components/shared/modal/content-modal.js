@@ -37,9 +37,10 @@ function ContentGoProShop({ openModal = () => {} }) {
                                     }
                                     >
                                     <Meta
-                                      title={el.name}
+                                      title={el.name && el.name.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ")}
                                       description={`Precio de...  S/ ${el.price}`}
                                     />
+                                    <br></br>
                                     <Button type="primary" size="large" onClick={() => openModal(el)}>PEDIR</Button>
                                 </Card>
                               </Col>                             

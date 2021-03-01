@@ -169,11 +169,7 @@ table tbody tr td#desc-product {
   }
 }
 .document__title {
-  border: 1px solid royalblue;
   padding: 20px;
-}
-.document__title:hover {
-  transition: 0.35s ease-out all;
   background-color: black;
   color:white
 }

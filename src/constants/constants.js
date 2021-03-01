@@ -1,7 +1,7 @@
 export const AccesoriesGoPRo = [
   {
     name: 'Arnés de pecho',
-    price: 40,
+    price: 42,
     img: './images/gopro/arnes-pecho.png',
     desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
   },
@@ -19,7 +19,7 @@ export const AccesoriesGoPRo = [
   },
   {
     name: 'Gancho 360°',
-    price: 30,
+    price: 28,
     img: './images/gopro/360.png',
     desc: 'Gancho de alta presión con soporte rotatorio 360°'
   },
@@ -31,7 +31,7 @@ export const AccesoriesGoPRo = [
   },
   {
     name: 'Pegatinas',
-    price: 8,
+    price: 7,
     img: './images/gopro/pegatinas.png',
     desc: 'Adhesivos por ambos lados para base curvo o plana'
   },
@@ -43,7 +43,7 @@ export const AccesoriesGoPRo = [
   },
   {
     name: 'Base curvo para casco',
-    price: 15,
+    price: 16,
     img: './images/gopro/base-curvo.png',
     desc: 'Base perfecta para superficies curvas y de alta resistencia'
   },
@@ -55,7 +55,7 @@ export const AccesoriesGoPRo = [
   },
   {
     name: 'Brazo extensión largo',
-    price: 18,
+    price: 16,
     img: './images/gopro/brazo-largo.png',
     desc: 'Extensión de 5cm aprox para articulación y manipulación de camara'
   },
@@ -91,19 +91,19 @@ export const AccesoriesGoPRo = [
   },
   {
     name: 'Arnés de cabeza',
-    price: 35,
+    price: 30,
     img: './images/gopro/vincha.png',
     desc: 'Vincha resistente y flexible con regulador deacuerdo al diámetro de la cabeza'
   },
   {
     name: 'Sujetador de muñeca',
-    price: 30,
+    price: 24,
     img: './images/gopro/muñeca.png',
     desc: 'Soporte con engranaje para cámara y cinta para sujetar brazo o muñeca de alta resistencia'
   },
   {
     name: 'Sujetador de timón',
-    price: 30,
+    price: 28,
     img: './images/gopro/sujetador-timon.png',
     desc: 'Sujetador a tubo de medida universal y engranaje a cámara, ideal para bicicletas y motos'
   },

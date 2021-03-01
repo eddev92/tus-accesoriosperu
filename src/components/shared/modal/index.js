@@ -8,7 +8,7 @@ tailLayout, layout }) {
   console.log(responseSentEmail)
   console.log(productSelected)
   console.log(finalOrder)
-  const urlAux = (finalOrder && responseSentEmail && productSelected) ? urlWhatsAppModified(finalOrder, productSelected) : urlWhatsApp()
+  const urlAux = (finalOrder && responseSentEmail && productSelected) && urlWhatsApp()
   console.log(urlAux)
   if (productSelected) {
     return (
@@ -44,8 +44,8 @@ tailLayout, layout }) {
           </thead>
           <tbody>
             <tr>
-              <td data-label="Account">S/ {productSelected.price}</td>
-              <td data-label="Due Date" id="desc-product" >{(productSelected && productSelected.desc) && productSelected.desc}</td>
+              <td data-label="Precio">S/ {productSelected.price}</td>
+              <td data-label="Descripcion" id="desc-product" >{(productSelected && productSelected.desc) && productSelected.desc}</td>
             </tr>
           </tbody>
         </table>
@@ -57,7 +57,7 @@ tailLayout, layout }) {
             <div className="content-result-buy" >
             <Alert
                   message={responseSentEmail.data.status === 200 ? "Tu pedido ha sido generado con éxito!" : "Ocurrió un problema, intentalo nuevamente por favor"}
-                  description={`Recuerda que debes comunicarte al siguiente enlace para confirmar tu fecha de envío y hacer seguimiento de tu orden:`}
+                  description={`Vamos a comunicarnos contigo lo más pronto posible. También puedes comunicarte al siguiente enlace para confirmar tu fecha de envío y hacer seguimiento de tu orden:`}
                   type="success"
                   showIcon
                 />
@@ -118,7 +118,7 @@ tailLayout, layout }) {
             </Form.Item>
             <span className="ant-form-text"> unidades</span>
           </Form.Item>
-              <Form.Item name={['clientComment', 'comment']} label="Comentario:">
+              <Form.Item name={['clientComment', 'comment']} label="Referencia de dirección:" rules={[{ required: true, message: 'Referencia es requerida' }]}>
                 <Input.TextArea value={productSelected.comment} />
               </Form.Item>
               <Form.Item {...tailLayout}>

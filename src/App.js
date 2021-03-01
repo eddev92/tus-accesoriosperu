@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import firebase from 'firebase';
+import config from './config';
 import ModalComponent from './components/shared/modal';
 import ContentGoProShop from './components/shared/modal/content-modal';
 import { urlWhatsApp } from './constants/routes';
+import TusAccesoriosPeruServices from './services/services';
+
+firebase.initializeApp(config);
+const publicationRef = firebase.database();
+const ref =	publicationRef.ref('/');
 
 function App() {
   const finalOrderObj = {
@@ -56,6 +63,8 @@ const closeModal = () => {
   setFinalOrder(finalOrderObj)
 }
 const onFinish = (values) => {
+    const service = new TusAccesoriosPeruServices(ref);
+
     if (values && values.quantityItems === undefined) {
         values.quantityItems = 1
     }
@@ -68,6 +77,8 @@ const onFinish = (values) => {
     // sentMail(values)
     }
     // window.location="https://wa.me/51994381708?texto=Quisiera%20consultar%20sobre%20la%20oferta%20de%20departamento"
+    service.saveClient(values, productSelected)
+
     setResponseSentEmail({
         data: {
             status: 200,
@@ -86,30 +97,7 @@ const onFinish = (values) => {
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
   };
-// const sentMail = (order: any) => {
-//     console.log(order)
-//     // axios.defaults.headers.post['Content-Type'] ='application/json';
-//     axios.defaults.headers.post['Authorization'] ='Pkb2TItFQuCBtCP-JROzEg';
-//     axios.post({
-//         method: 'post', //you can set what request you want to be
-//         url: 'https://starscorporation.pe/api/email',
-//         data: order,
-//         headers: {
-//           Authorization: 'Pkb2TItFQuCBtCP-JROzEg',
-//           ContentType: 'application/json'
-//         }})
-//     .then(function (response: any) {
-//       // handle success
-//       console.log(response);
-//       setResponseSentEmail(response)
-//     })
-//     .catch(function (error: any) {
-//       // handle error
-//       console.log(error);
-//       setResponseSentEmail(error)
-//     })
-  
-// }
+
 const backToShop = () => {
     closeModal()
     setResponseSentEmail(null)
@@ -127,7 +115,7 @@ const setQuantity = (evt) => {
                     <div className="document gopro">
                         <div className="document__header">
                             <h1 className="document__title">BIENVENIDO A NUESTRA FERRETERIA DE LAS CAMARAS</h1>
-                            <h4 className="document__subtitle">Encuentra diversos accesorios para tu cámara de accion</h4>
+                            <h2 className="document__subtitle">Encuentra diversos accesorios para tu cámara de accion</h2>
                         </div>
                         <div className="document__content card">
                             <div className="typography">
