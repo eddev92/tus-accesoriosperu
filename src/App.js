@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Tooltip, Button } from 'antd';import './App.css';
 import firebase from 'firebase';
 import config from './config';
 import ModalComponent from './components/shared/modal';
@@ -110,12 +109,17 @@ const setQuantity = (evt) => {
 }
   return (
     <div className="App">
+        <a href="https://wa.me/51994381708" target="_blank" className="whats-img">
+        <Tooltip placement="left" title={<span>En qué podemos ayudarte?</span>}>
+            <img src="./images/logo-whats.png" />
+      </Tooltip>
+        </a>
        <div className="block">
                 <div className="container">
                     <div className="document gopro">
                         <div className="document__header">
                             <h1 className="document__title">BIENVENIDO A NUESTRA FERRETERIA DE LAS CAMARAS</h1>
-                            <h2 className="document__subtitle">Encuentra diversos accesorios para tu cámara de accion</h2>
+                            <h2 className="document__subtitle">Encuentra diversos accesorios para tu cámara de acción</h2>
                         </div>
                         <div className="document__content card">
                             <div className="typography">
@@ -125,6 +129,29 @@ const setQuantity = (evt) => {
                                     <AppImage src="/images/signature.jpg" width="160" height="55" />
                                 </div> */}
                             </div>
+                        </div>
+                        <div className="document__footer">
+                            <footer class="site-footer">
+                                <hr></hr>
+                                <div class="container">
+                                    <div class="row">
+                                    <div class="col-md-8 col-sm-6 col-xs-12">
+                                        <p class="copyright-text">Copyright &copy; 2020 - 2021 Todos los derechos reservados por 
+                                    <a href="https://starscorporation.pe/" target="_blank"> Stars Corporation</a>
+                                        </p>
+                                    </div>
+
+                                    {/* <div class="col-md-4 col-sm-6 col-xs-12">
+                                        <ul class="social-icons">
+                                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+                                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+                                        </ul>
+                                    </div> */}
+                                    </div>
+                                </div>
+                            </footer>
                         </div>
                     </div>
                 </div>

@@ -112,5 +112,29 @@ export const AccesoriesGoPRo = [
     price: 50,
     img: './images/gopro/maletin.png',
     desc: 'Maleta ideal para llevar accesorios y/o cámaras'
+  },
+  {
+    name: 'Case normal Gopro Black 7',
+    price: 100,
+    img: './images/gopro/case_black_7.jpg',
+    desc: 'Frame protector básico para gopro'
+  },
+  {
+    name: 'Case Acuático Gopro Black 7',
+    price: 120,
+    img: './images/gopro/case_acuatico_black_7.jpg',
+    desc: 'Frame proctector actuático con botones y máxima resistencia a la presión bajo el agua. (MAX 10mts)'
+  },
+  {
+    name: 'Case normal Gopro Session',
+    price: 100,
+    img: './images/gopro/case_session_4.png',
+    desc: 'Frame protector básico para gopro session'
+  },
+  {
+    name: 'Adaptador para tabla de surf',
+    price: 100,
+    img: './images/gopro/soporte_tabla.jpeg',
+    desc: 'Frame protector básico para gopro session'
   }
 ];
