@@ -37,8 +37,6 @@
   }
 }
 
-
-
 /* APP STYLES */
 .ant-card-grid:hover {
   background-color: #1a78bd;
@@ -344,3 +342,19 @@ a.whats-img img {
     font-weight:600
   }
 }
+table#list-orders, #list-orders th, #list-orders td {
+  border: 1px solid black;
+}
+table#list-orders {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100% !important;
+  border: 1px solid #ddd !important;
+}
+
+#list-orders th, #list-orders td {
+  text-align: left;
+  padding: 8px;
+}
+
+#list-orders tr:nth-child(even){background-color: #f2f2f2}

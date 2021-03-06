@@ -14,14 +14,17 @@ class TusAccesoriosPeruServices {
   }
   
   saveClient = (order, productSelected) => {
+    if (this.ref) {
+      console.log(this.ref)
     let newOrder = {}
     newOrder = { ...order }
     console.log(newOrder, "newOrder")
     console.log(order)
     newOrder.price = productSelected.price
     console.log(productSelected)
-		const clientsRef = this.ref.child("clients");
-		return clientsRef.push(newOrder);
+      const clientsRef = this.ref.child("clients");
+      return clientsRef.push(newOrder);
+    }
 	}
 }
 
