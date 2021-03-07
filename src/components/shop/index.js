@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
-import { Tooltip, Button } from 'antd';import '../../App.css';
-// import firebase from 'firebase';
-// import config from '../../config';
+import { Tooltip, Button, Checkbox  } from 'antd';
+import '../../App.css';
 import ModalComponent from '../../components/shared/modal';
 import ContentGoProShop from '../../components/shared/modal/content-modal';
 import { urlWhatsApp } from '../../constants/routes';
 import TusAccesoriosPeruServices from '../../services/services';
-
-// firebase.initializeApp(config);
-// const publicationRef = firebase.database();
-// const ref =	publicationRef.ref('/');
-
+import WishListModalComponent from '../shared/modal/wishlist-modal';
 
 const ShopComponent = ({reference}) => {
   const finalOrderObj = {
@@ -31,12 +26,25 @@ const [responseSentEmail, setResponseSentEmail] = useState(null)
 const [productSelected, setProductSelected] = useState(productSelectedInitial)
 const [finalOrder, setFinalOrder] = useState(finalOrderObj)
 
+
+const [wishList, setWishList] = useState([])
+const [openModalWishListUI, setOpenModalWishList] = useState(false)
+const [payNowUI, setPayNowUI] = useState(false)
+
 const openModal = (el) => {
   console.log('open modal', el)
   setProductSelected(el)
   setOpenModalUI(true)
 }
-const closeModal = () => {        
+const openModalWishList = (el) => {
+  console.log('open modal', el)
+//   setProductSelected(el)
+  setOpenModalWishList(true)
+}
+const closeModalWishList = () => {
+    setOpenModalWishList(false)
+}
+const closeModal = () => {
     const listInputs = [
         'basic_fullNames',
         'basic_dni',
@@ -45,7 +53,7 @@ const closeModal = () => {
         'basic_quantityItems',
         'basic_clientComment',
     ]
-    // const names: any = document.querySelectorAll('#')
+
     listInputs.forEach((el) => {
         const aux = document.querySelectorAll(`#${el}`)
         if (aux && aux[0] && aux[0].id === 'basic_quantityItems') {
@@ -59,7 +67,7 @@ const closeModal = () => {
     })
     console.log('close modal')
     setOpenModalUI(false)
-//   setProductSelected({fullNames: ''})
+
   setFinalOrder(finalOrderObj)
 }
 const onFinish = (values) => {
@@ -75,9 +83,7 @@ const onFinish = (values) => {
     if (productSelected && productSelected.name) {
         values.productSelected = productSelected.name
     console.log('Success:', values);
-    // sentMail(values)
     }
-    // window.location="https://wa.me/51994381708?texto=Quisiera%20consultar%20sobre%20la%20oferta%20de%20departamento"
     service.saveClient(values, productSelected)
 
     setResponseSentEmail({
@@ -98,17 +104,45 @@ const onFinish = (values) => {
   const tailLayout = {
     wrapperCol: { offset: 8, span: 16 },
   };
-
+  const payNow = () => {
+setPayNowUI(true)
+  }
 const backToShop = () => {
     closeModal()
     setResponseSentEmail(null)
 }
-const setQuantity = (evt) => {
-    if (evt) {
-        console.log(evt)
-        seQquantitySelected(evt)
+    const setQuantity = (evt) => {
+        if (evt) {
+            console.log(evt)
+            seQquantitySelected(evt)
+        }
     }
-}
+    const handleProduct = (e) => {
+        console.log(e)
+        let auxList = [...wishList]
+        let filterArray = []
+        const auxProduct = { ...e.target.value}
+        console.log(e.target.checked)
+        console.log(e.target.value)
+        if (e) {
+            if (!e.target.checked) {
+                console.log("entro")
+                auxList = auxList.map((el, index) => {
+                    if (el.cod === e.target.value.cod) {
+                        el.checked = false
+                        el = {}
+                    }
+                    return el
+                })
+            } else {
+                auxProduct.checked = e.target.checked
+                auxList.push(auxProduct)
+            }
+            auxList.forEach(e => {if (e && e.cod) filterArray.push(e)})
+            setWishList(filterArray)
+        }
+    }
+    console.log(wishList, "wishList")
   return (
     <div className="App">
         <a href="https://wa.me/51994381708" target="_blank" className="whats-img">
@@ -125,7 +159,7 @@ const setQuantity = (evt) => {
                         </div>
                         <div className="document__content card">
                             <div className="typography">
-                                <ContentGoProShop openModal={openModal}/>
+                                <ContentGoProShop openModal={openModal} onChange={handleProduct} />
 
                                 {/* <div className="document__signature">
                                     <AppImage src="/images/signature.jpg" width="160" height="55" />
@@ -134,6 +168,7 @@ const setQuantity = (evt) => {
                         </div>
                         <div className="document__footer">
                             <footer class="site-footer">
+                                <p><a mailto="ventas@starscorporation.pe">ventas@starscorporation.pe</a></p>
                                 <hr></hr>
                                 <div class="container">
                                     <div class="row">
@@ -158,6 +193,9 @@ const setQuantity = (evt) => {
                     </div>
                 </div>
             </div>
+            <Button type="primary" onClick={openModalWishList} danger id="btn-wishlist" className={(wishList.length > 0 ) ? "active" : "desactive"}>
+            MI LISTA DE DESEO
+            </Button>
             <ModalComponent 
                 onFinish={onFinish}
                 onFinishFailed={onFinishFailed}
@@ -171,6 +209,13 @@ const setQuantity = (evt) => {
                 backToShop={backToShop}
                 setQuantity={setQuantity}
                 quantitySelected={quantitySelected}
+            />
+            <WishListModalComponent 
+            visible={openModalWishListUI}
+            closeModal={closeModalWishList}
+            products={wishList}
+            payNow={payNow}
+            payNowUI={payNowUI}
             />
     </div>
   );

@@ -1,7 +1,7 @@
 // react,
 import React, { useState } from 'react';
 // application
-import { Card, Row, Col, Button, Modal } from 'antd';
+import { Card, Row, Col, Button, Checkbox } from 'antd';
 // import url from '~/services/url';
 import { AccesoriesGoPRo } from '../../../constants/constants'
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
@@ -13,7 +13,7 @@ const gridStyle = {
   // margin: '14px',
 };
 const { Meta } = Card;
-function ContentGoProShop({ openModal = () => {} }) {
+function ContentGoProShop({ openModal = () => {}, onChange = () => {} }) {
   // const openModal = (el: any) => {
   //   console.log('open modal', el)
   // }
@@ -36,6 +36,9 @@ function ContentGoProShop({ openModal = () => {} }) {
                                       />
                                     }
                                     >
+                                      <Checkbox onChange={onChange} value={el} >Agregar a la lista</Checkbox>
+                                    <br></br>
+                                    <br></br>
                                     <Meta
                                       title={el.name && el.name.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ")}
                                       description={`Precio de...  S/ ${el.price}`}

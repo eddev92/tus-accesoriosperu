@@ -121,6 +121,11 @@ tailLayout, layout }) {
               <Form.Item name={['clientComment', 'comment']} label="Referencia de dirección:" rules={[{ required: true, message: 'Referencia es requerida' }]}>
                 <Input.TextArea value={productSelected.comment} />
               </Form.Item>
+              <Alert
+                  description="El precio no incluye delivery"
+                  type="warning"
+                  showIcon
+                />
               <Form.Item {...tailLayout}>
                 <strong>
                 TOTAL: S/ {(quantitySelected && productSelected && productSelected.price) ? quantitySelected * productSelected.price : ''}

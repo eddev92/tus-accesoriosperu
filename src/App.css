@@ -358,3 +358,11 @@ table#list-orders {
 }
 
 #list-orders tr:nth-child(even){background-color: #f2f2f2}
+
+table#table-wishlist img {
+  width: 70px;
+}
+.modal-wishlist .ant-modal-body {
+  overflow-y: auto !important;
+  max-height: 410px !important;
+}

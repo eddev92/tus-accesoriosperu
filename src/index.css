@@ -11,3 +11,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* aux styles */
+button#btn-wishlist.desactive {
+  position: fixed !important;
+  z-index: 999 !important;
+  left: 0 !important;
+  /* top: 0; */
+  bottom: 3% !important;
+  margin-left: -572px !important;
+}
+button#btn-wishlist.active {
+  position: fixed !important;
+  z-index: 999 !important;
+  left: 0 !important;
+  /* top: 0; */
+  bottom: 3% !important;
+  margin-left: 15px !important;
+}
+.ant-card-meta-description {
+  font-weight: 700;
+}

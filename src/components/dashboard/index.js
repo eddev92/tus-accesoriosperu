@@ -22,8 +22,7 @@ const Dashboard = ({ reference }) => {
             clientsAux = Object.values(clientsAux)
             const idsAux = Object.keys(Object.values(snapshot.val())[0]);
             setList(clientsAux)
-            return console.log(clientsAux, "clientsAux")
-             
+            return console.log(clientsAux, "clientsAux")            
             // return 
           }
           return;
