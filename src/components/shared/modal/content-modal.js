@@ -13,15 +13,16 @@ const gridStyle = {
   // margin: '14px',
 };
 const { Meta } = Card;
-function ContentGoProShop({ openModal = () => {}, onChange = () => {} }) {
+function ContentGoProShop({ openModal = () => {}, onChange = () => {}, products = [] }) {
   // const openModal = (el: any) => {
   //   console.log('open modal', el)
   // }
+  console.log(products)
     return (
         <React.Fragment>
           <Row gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }}>
           {
-                          AccesoriesGoPRo && AccesoriesGoPRo.map(el => {
+                          (products && products.length > 0) ? products.map(el => {
                             return (
                               <Col className="gutter-row">
                                  <Card
@@ -49,6 +50,15 @@ function ContentGoProShop({ openModal = () => {}, onChange = () => {} }) {
                               </Col>                             
                               )
                           })
+                          :
+                          <div className="loader">
+                            <div className="load">
+                              <div className="circle" id="circle-1" ></div>
+                              <div className="circle" id="circle-2" ></div>
+                              <div className="circle" id="circle-3" ></div>
+                            </div>
+                          </div>
+
                         }
           </Row>                        
         </React.Fragment>

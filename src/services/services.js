@@ -26,6 +26,13 @@ class TusAccesoriosPeruServices {
       return clientsRef.push(newOrder);
     }
 	}
+
+  saveClientWishLIst = (order) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("clients");
+      return clientsRef.push(order);
+    }
+	}
 }
 
 export default TusAccesoriosPeruServices;

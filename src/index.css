@@ -32,3 +32,69 @@ button#btn-wishlist.active {
 .ant-card-meta-description {
   font-weight: 700;
 }
+/* SPINNER */
+.loader{
+  margin: 15% auto;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: block;
+  background: white;
+}
+.load{
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  width: 360px;
+  height: 360px;
+  margin-right: -180px;
+  margin-top: -180px;
+}
+.circle{
+  border-radius: 100%;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+#circle-1{
+  width: 160px;
+  height: 160px;
+  margin-top: -80px;
+  margin-right: -80px;
+  /* border: 16px solid black;
+  border-top: 16px solid black;
+  border-bottom: 16px solid black; */
+  animation-duration: 2s;
+  animation-name: spin1;
+}
+#circle-2{
+  width: 150px;
+  height: 150px;
+  margin-top: -65px;
+  margin-right: -65px;
+  /* border: 8px solid blue;
+  border-left: 8px solid blue;
+  border-right: 8px solid blue; */
+  animation-name: spin1;
+  animation-duration: 4s;
+}
+#circle-3{
+  width: 128px;
+  height: 128px;
+  margin-top: -58px;
+  margin-right: -58px;
+  border: 12px solid red;
+  border-left: 12px solid blue;
+  border-right: 12px solid blue;
+  animation-name: spin1;
+  animation-duration: 4s;
+  animation-direction: reverse;
+}
+@keyframes spin1{
+    to {transform: rotate(360deg);}
+}

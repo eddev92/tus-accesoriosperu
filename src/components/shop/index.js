@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tooltip, Button, Checkbox  } from 'antd';
 import '../../App.css';
 import ModalComponent from '../../components/shared/modal';
@@ -6,8 +6,19 @@ import ContentGoProShop from '../../components/shared/modal/content-modal';
 import { urlWhatsApp } from '../../constants/routes';
 import TusAccesoriosPeruServices from '../../services/services';
 import WishListModalComponent from '../shared/modal/wishlist-modal';
+import { AccesoriesGoPRo } from './../../constants/constants'
 
 const ShopComponent = ({reference}) => {
+    // const aux = AccesoriesGoPRo && AccesoriesGoPRo.map(e => {
+    //     if (e) e.checked = false
+    //     return e
+    // })
+    // console.log(aux)
+    useEffect(() => {
+        setTimeout(() => {
+            setProductsInitial(AccesoriesGoPRo)
+        }, 1200)
+    })
   const finalOrderObj = {
     fullNames:'',
     dni: '',
@@ -25,11 +36,14 @@ const [quantitySelected, seQquantitySelected] = useState(1)
 const [responseSentEmail, setResponseSentEmail] = useState(null)
 const [productSelected, setProductSelected] = useState(productSelectedInitial)
 const [finalOrder, setFinalOrder] = useState(finalOrderObj)
+const [productsInitial, setProductsInitial] = useState([])
 
 
 const [wishList, setWishList] = useState([])
 const [openModalWishListUI, setOpenModalWishList] = useState(false)
 const [payNowUI, setPayNowUI] = useState(false)
+const [quantityWishList, setQuantityWishList] = useState(1)
+const [responseSentOrderWishList, setResponseSentOrderWishList] = useState(null)
 
 const openModal = (el) => {
   console.log('open modal', el)
@@ -42,7 +56,16 @@ const openModalWishList = (el) => {
   setOpenModalWishList(true)
 }
 const closeModalWishList = () => {
+    console.log('close modal wishlist')
+    console.log(responseSentOrderWishList)
     setOpenModalWishList(false)
+    setPayNowUI(false)
+    if (responseSentOrderWishList && responseSentOrderWishList.data) {
+        // handleReturnOption(1)
+        setWishList([])
+        setProductsInitial([])
+        setResponseSentOrderWishList(null)
+    }
 }
 const closeModal = () => {
     const listInputs = [
@@ -94,6 +117,27 @@ const onFinish = (values) => {
     })
   };
 
+  const onFinishWishList = (values) => {
+    console.log(reference)
+    const service = new TusAccesoriosPeruServices(reference);
+
+    setFinalOrder(values)
+    let aux = { ...values }
+    console.log(values)
+    console.log(wishList)
+    aux.products = []
+    aux.products = wishList
+    console.log(aux)
+    service.saveClientWishLIst(aux)
+
+    setResponseSentOrderWishList({
+        data: {
+            status: 200,
+            whatsAppMsg: urlWhatsApp(values)
+        }
+    })
+  }
+
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
   };
@@ -105,12 +149,71 @@ const onFinish = (values) => {
     wrapperCol: { offset: 8, span: 16 },
   };
   const payNow = () => {
-setPayNowUI(true)
+    setPayNowUI(true)
   }
-const backToShop = () => {
-    closeModal()
-    setResponseSentEmail(null)
-}
+  const payFinishOrder = () => {
+
+  }
+    const backToShop = () => {
+        closeModal()
+        setResponseSentEmail(null)
+    }
+    const handleReturnOption = (option) => {
+        if (option === 1) {
+            setResponseSentOrderWishList(null)
+            let aux = [ ...wishList ]
+            aux = aux.map(e => {
+                if (e.checked) e.checked = false
+                return e;
+            })
+            setWishList(aux)
+            setProductsInitial([])
+            setWishList([])
+        }
+        
+            closeModalWishList()
+            let aux = [ ...wishList ]
+            aux = aux.map(e => {
+                if (e.checked) e.checked = false
+                return e;
+            })
+            setWishList(aux)
+            setProductsInitial([])
+            setWishList([])
+
+    }
+    const backToShopFromWishList = () => {
+        setOpenModalWishList(false)
+        setResponseSentOrderWishList(null)
+        let aux = [ ...wishList ]
+        aux = aux.map(e => {
+            if (e.checked) e.checked = false
+            return e;
+        })
+        setPayNowUI(false)
+        setWishList(aux)
+        setProductsInitial([])
+        setWishList([])
+        console.log(wishList)
+    }
+    const onChangeQuantity = (e, productSelected) => {
+        let aux = [ ...wishList]
+        if (e) {
+            console.log(e)
+            console.log(productSelected)
+            console.log(wishList)
+            if (wishList) {
+                aux = aux.map(el => {
+                    if (productSelected.cod === el.cod) {
+                        console.log(el)
+                        el.quantity = e
+                    }
+                    return el
+                })
+            }
+            setWishList(aux)
+        }
+    }
     const setQuantity = (evt) => {
         if (evt) {
             console.log(evt)
@@ -130,21 +233,27 @@ const backToShop = () => {
                 auxList = auxList.map((el, index) => {
                     if (el.cod === e.target.value.cod) {
                         el.checked = false
-                        el = {}
+                        el = {}                        
+                        if ((el) && el.quantity) el.quantity = 1
                     }
                     return el
                 })
             } else {
                 auxProduct.checked = e.target.checked
+                auxProduct.quantity = 1
                 auxList.push(auxProduct)
             }
-            auxList.forEach(e => {if (e && e.cod) filterArray.push(e)})
+            auxList.forEach(e => {if (e && e.cod)filterArray.push(e)})
+            console.log(filterArray)
             setWishList(filterArray)
         }
     }
     console.log(wishList, "wishList")
   return (
     <div className="App">
+    <a href="tel:+51994381708" target="_blank" className="call-img">
+        <img src="./images/logo-call.png" />
+    </a>
         <a href="https://wa.me/51994381708" target="_blank" className="whats-img">
         <Tooltip placement="left" title={<span>En qué podemos ayudarte?</span>}>
             <img src="./images/logo-whats.png" />
@@ -154,12 +263,12 @@ const backToShop = () => {
                 <div className="container">
                     <div className="document gopro">
                         <div className="document__header">
-                            <h1 className="document__title">BIENVENIDO A NUESTRA FERRETERIA DE LAS CAMARAS</h1>
+                            <h1 className="document__title">TUSACCESORIOS [PERU]</h1>
                             <h2 className="document__subtitle">Encuentra diversos accesorios para tu cámara de acción</h2>
                         </div>
                         <div className="document__content card">
                             <div className="typography">
-                                <ContentGoProShop openModal={openModal} onChange={handleProduct} />
+                                <ContentGoProShop openModal={openModal} onChange={handleProduct} products={productsInitial} />
 
                                 {/* <div className="document__signature">
                                     <AppImage src="/images/signature.jpg" width="160" height="55" />
@@ -216,6 +325,12 @@ const backToShop = () => {
             products={wishList}
             payNow={payNow}
             payNowUI={payNowUI}
+            payFinishOrder={payFinishOrder}
+            onFinishWishList={onFinishWishList}
+            onChangeQuantity={onChangeQuantity}
+            quantityWishList={quantityWishList}
+            responseSentOrderWishList={responseSentOrderWishList}
+            backToShopFromWishList={backToShopFromWishList}
             />
     </div>
   );

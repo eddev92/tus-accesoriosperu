@@ -79,14 +79,14 @@ export const AccesoriesGoPRo = [
   {
     cod: 100012,
     name: 'Gancho J',
-    price: 18.50,
+    price: 17.50,
     img: './images/gopro/gancho-J.png',
     desc: 'Gancho con extensión de brazo corto incluida'
   },
   {
     cod: 100013,
     name: 'Base redondo a tuerca',
-    price: 18.50,
+    price: 15.50,
     img: './images/gopro/base-redondo.png',
     desc: 'Adaptador giratorio con entrada de tuerca directa.'
   },
@@ -159,5 +159,26 @@ export const AccesoriesGoPRo = [
     price: 85,
     img: './images/gopro/soporte_tabla.jpeg',
     desc: 'Frame protector básico para gopro session'
+  },
+  {
+    cod: 100024,
+    name: 'Soporte para la quijada del casco',
+    price: 65,
+    img: './images/gopro/quijada-casco.png',
+    desc: 'Soporte altamente resistente, te garantizará una estabilidad y vistas espectaculares, debido a su posición estratégica'
+  },
+  {
+    cod: 100025,
+    name: 'Soporte articulado de 4 piezas para casco',
+    price: 70,
+    img: './images/gopro/quijada-articulado.png',
+    desc: 'Accesorio compuesto por 4 brazos para una mayor manipulación de la cámara'
+  },
+  {
+    cod: 100026,
+    name: 'Case Acuático para Gopro Black 8',
+    price: 120,
+    img: './images/gopro/case-acuatico-gopro8.png',
+    desc: 'Protector acuático para Gopro8, garantizará manipulación y protección al máximo bajo agua'
   }
 ];

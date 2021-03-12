@@ -21,6 +21,7 @@ tailLayout, layout }) {
         cancelButtonProps={{hidden: responseSentEmail ? true : false}}
         // onOk={() => setVisible(state)}
         onCancel={() => closeModal()}
+        cancelText="CANCELAR"
         width={800}
       >
       <Row gutter={{ xs: 16, sm: 6, md: 6, lg: 32 }}>

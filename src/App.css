@@ -43,7 +43,8 @@
   color: white;
 }
 .document__content {
-  padding: 0 !important;
+  padding: 0 60px !important;
+  min-height: calc(100vh - 350px);
 }
 #card-product {
   width: auto !important;
@@ -53,8 +54,9 @@
   margin: auto;
 }
 .document.gopro {
-  max-width: 900px;
+  width: 100%;
   margin: auto;
+  overflow-x: hidden;
 }
  .ant-col-8 {
   /* max-width: 32% !important; */
@@ -168,15 +170,32 @@ table tbody tr td#desc-product {
   }
 }
 .document__title {
-  padding: 20px;
+  padding: 15px 50px 50px 50px;
   background-color: black;
-  color:white
+  color: white;
+  font-size: 5em;
+  font-weight: 800;
+}
+h2.document__subtitle {
+  box-shadow: 0 0 5px rgb(0 0 0 / 60%);
+  width: 90%;
+  padding: 5px;
+    min-height: 50px;
+    margin: -61px auto 30px;
+    background: #ff4d4f;
 }
 a.whats-img img {
   position: fixed;
   z-index: 999;
   width: 60px;
   bottom: 0;
+  right: 0;
+}
+a.call-img img {
+  position: fixed;
+  z-index: 999;
+  width: 60px;
+  bottom: 12%;
   right: 0;
 }
 .site-footer
@@ -335,6 +354,9 @@ a.whats-img img {
 }
 @media (max-width:767px)
 {
+  h1.document__title {
+    font-size: 2em !important;
+  }
   .social-icons li.title
   {
     display:block;
@@ -359,6 +381,9 @@ table#list-orders {
 
 #list-orders tr:nth-child(even){background-color: #f2f2f2}
 
+table#table-wishlist {
+  margin: auto
+}
 table#table-wishlist img {
   width: 70px;
 }
