@@ -287,14 +287,16 @@ const onFinish = (values) => {
                                         </p>
                                     </div>
 
-                                    {/* <div class="col-md-4 col-sm-6 col-xs-12">
-                                        <ul class="social-icons">
-                                        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-                                        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+                                    <div class="col-md-4 col-sm-6 col-xs-12 brands-payments">
+                                        <ul>
+                                        <li>
+                                            <img src="./images/visa.png" />
+                                        </li>
+                                        <li>
+                                            <img src="./images/mscd.png" />
+                                        </li>
                                         </ul>
-                                    </div> */}
+                                    </div>
                                     </div>
                                 </div>
                             </footer>

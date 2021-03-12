@@ -194,8 +194,8 @@ a.whats-img img {
 a.call-img img {
   position: fixed;
   z-index: 999;
-  width: 60px;
-  bottom: 12%;
+  width: 50px;
+  bottom: 18%;
   right: 0;
 }
 .site-footer
@@ -390,4 +390,18 @@ table#table-wishlist img {
 .modal-wishlist .ant-modal-body {
   overflow-y: auto !important;
   max-height: 410px !important;
+}
+.brands-payments ul {
+  display: inline-flex;
+  position: absolute;
+    margin: -25px 0;
+    /* float: right; */
+    left: 0;
+}
+.brands-payments ul li {
+  display: block;
+}
+.brands-payments img {
+  width: 30px;
+  margin: 5px;
 }
