@@ -13,7 +13,7 @@ const gridStyle = {
   // margin: '14px',
 };
 const { Meta } = Card;
-function ContentGoProShop({ openModal = () => {}, onChange = () => {}, products = [] }) {
+function ContentGoProShop({ openModal = () => {}, onChange = () => {}, products = [], optionSize = null}) {
   // const openModal = (el: any) => {
   //   console.log('open modal', el)
   // }

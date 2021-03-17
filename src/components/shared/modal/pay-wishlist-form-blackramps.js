@@ -2,7 +2,7 @@ import React from 'react';
 import { Modal, Alert  } from 'antd';
 import { Form, Input, Button, InputNumber, Card, Row, Col, Table, Tag, Space } from 'antd';
 
-const PayNowWishListForm = ({ total = 0, payNow = () => {}, finalOrder = null, quantitySelected = 1, setQuantity = null, backToShopFromWishList = null, responseSentOrderWishList = null, productSelected = {}, visible = false, closeModal = () => {}, onFinishFailed = () =>{}, onFinish = () =>{},
+const PayNowBlackRampsWishListForm = ({ total = 0, payNow = () => {}, finalOrder = null, quantitySelected = 1, setQuantity = null, backToShopFromWishList = null, responseSentOrderWishList = null, productSelected = {}, visible = false, closeModal = () => {}, onFinishFailed = () =>{}, onFinish = () =>{},
 tailLayout, layout }) => {
   return (    
       (responseSentOrderWishList && responseSentOrderWishList.data) ?
@@ -16,7 +16,7 @@ tailLayout, layout }) => {
           />
           <br></br>
           <Tag color="blue">
-            <a target="_blank" href="https://wa.me/51994381708">{responseSentOrderWishList.data.whatsAppMsg}</a>
+          <a target="_blank" href="https://wa.me/51966774697">https://wa.me/51966774697</a>
             </Tag>
             <br></br>
             <br></br>
@@ -43,7 +43,7 @@ tailLayout, layout }) => {
     >
               <Form.Item
                 label="Nombres y apellidos"
-                name="fullNamesWishList"
+                name="fullNamesBlackRampsWishList"
                 rules={[{ required: true, message: 'Nombres y apellidos son requeridos' }]}
               >
                 <Input
@@ -51,21 +51,21 @@ tailLayout, layout }) => {
               </Form.Item>
               <Form.Item
                 label="DNI"
-                name="dniWishList"
+                name="dniBlackRampsWishList"
                 rules={[{ required: true, message: 'DNI es requerido' }]}
               >
                 <Input />
               </Form.Item>
               <Form.Item
                 label="Teléfono de contacto"
-                name="phonesWishList"
+                name="phonesBlackRampsWishList"
                 rules={[{ required: true, message: 'Teléfono de contacto es requerido' }]}
               >
                 <Input />
               </Form.Item>
               <Form.Item
                 label="Dirección de envío"
-                name="addressWishList"
+                name="addressBlackRampsWishList"
                 rules={[{ required: true, message: 'Dirección de envío es requerido' }]}
               >
                 <Input />
@@ -91,4 +91,4 @@ tailLayout, layout }) => {
   )
 }
 
-export default PayNowWishListForm;
+export default PayNowBlackRampsWishListForm;

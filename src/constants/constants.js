@@ -23,7 +23,7 @@ export const AccesoriesGoPRo = [
   {
     cod: 100004,
     name: 'Gancho 360°',
-    price: 28,
+    price: 30,
     img: './images/gopro/360.png',
     desc: 'Gancho de alta presión con soporte rotatorio 360°'
   },
@@ -181,4 +181,82 @@ export const AccesoriesGoPRo = [
     img: './images/gopro/case-acuatico-gopro8.png',
     desc: 'Protector acuático para Gopro8, garantizará manipulación y protección al máximo bajo agua'
   }
+];
+
+
+export const BlackRampsProducts = [
+  {
+    cod: 100002,
+    name: 'Caja de 2M',
+    price: 480,
+    img: './images/skateboarding/caja_vede.jpg',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100003,
+    name: 'Cajón de 1.50Mx0.5M',
+    price: 230,
+    img: './images/skateboarding/cajon_150_x_50.jpg',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100004,
+    name: 'Cajón 1.50Mx1M',
+    price: 370,
+    img: './images/skateboarding/cajon_150_x_100.jpg',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100005,
+    name: 'Kicker 90cm',
+    price: 270,
+    img: './images/skateboarding/kicker_90.jpg',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+   {
+    cod: 100001,
+    name: 'Pirámide y tubo',
+    price: 590,
+    img: './images/skateboarding/botador_y_tubo.jpg',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100006,
+    name: 'Quarter 90',
+    price: 480,
+    img: './images/skateboarding/quarter_90.jpg',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  
+];
+
+export const TechnologyProducts = [
+  {
+    cod: 100001,
+    name: 'Cargador Iphone 1M',
+    price: 25,
+    img: './images/tech/cargador-iphone.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100002,
+    name: 'Soporte de gopro para estabilizador',
+    price: 75,
+    img: './images/tech/puluz.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100003,
+    name: 'Xiaomi Airdots',
+    price: 80,
+    img: './images/tech/xiaomi-airdots.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100004,
+    name: 'Xiaomi Smart Band 5',
+    price: 135,
+    img: './images/tech/xiaomi-smart.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  }  
 ];

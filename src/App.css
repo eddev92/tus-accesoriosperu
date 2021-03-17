@@ -43,7 +43,7 @@
   color: white;
 }
 .document__content {
-  padding: 0 60px !important;
+  padding: 0 130px !important;
   min-height: calc(100vh - 350px);
 }
 #card-product {
@@ -223,9 +223,9 @@ a.call-img img {
   margin-top:5px;
   letter-spacing:2px
 }
-.site-footer a
+.site-footer a, .site-footer p
 {
-  color:#737373;
+  color:white;
 }
 .site-footer a:hover
 {
@@ -354,8 +354,20 @@ a.call-img img {
 }
 @media (max-width:767px)
 {
+  img.img-logo {
+    width: 240px !important;
+    margin: 0 10px !important;
+  }
+  .blackramps .document__header img {
+    margin: -30px -10px !important;
+  }
+  .document__content {
+    padding: 0 30px !important;
+    /* min-height: calc(100vh - 350px); */
+  }
   h1.document__title {
     font-size: 2em !important;
+    padding: 175px 50px 50px 50px !important;
   }
   .social-icons li.title
   {
@@ -404,4 +416,19 @@ table#table-wishlist img {
 .brands-payments img {
   width: 30px;
   margin: 5px;
+}
+/*  BLACK RAMPS SECTION */
+
+.blackramps .document__header img {
+  height: 100px;
+  margin: 25px;
+  position: absolute;
+  left: 0;
+}
+
+img.img-logo {
+  width: 250px;
+    position: absolute;
+    left: 0;
+    margin: 15px;
 }

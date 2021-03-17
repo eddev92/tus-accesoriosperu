@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tooltip, Button, Checkbox  } from 'antd';
+import { Tooltip, Button, Modal, Menu, Switch  } from 'antd';
 import '../../App.css';
 import ModalComponent from '../../components/shared/modal';
 import ContentGoProShop from '../../components/shared/modal/content-modal';
@@ -7,13 +7,9 @@ import { urlWhatsApp } from '../../constants/routes';
 import TusAccesoriosPeruServices from '../../services/services';
 import WishListModalComponent from '../shared/modal/wishlist-modal';
 import { AccesoriesGoPRo } from './../../constants/constants'
+import MenuComponent from '../shared/menu';
 
 const ShopComponent = ({reference}) => {
-    // const aux = AccesoriesGoPRo && AccesoriesGoPRo.map(e => {
-    //     if (e) e.checked = false
-    //     return e
-    // })
-    // console.log(aux)
     useEffect(() => {
         setTimeout(() => {
             setProductsInitial(AccesoriesGoPRo)
@@ -44,6 +40,8 @@ const [openModalWishListUI, setOpenModalWishList] = useState(false)
 const [payNowUI, setPayNowUI] = useState(false)
 const [quantityWishList, setQuantityWishList] = useState(1)
 const [responseSentOrderWishList, setResponseSentOrderWishList] = useState(null)
+
+const [yapeModal, setOpenYapeModal] = useState(false)
 
 const openModal = (el) => {
   console.log('open modal', el)
@@ -106,6 +104,7 @@ const onFinish = (values) => {
     if (productSelected && productSelected.name) {
         values.productSelected = productSelected.name
     console.log('Success:', values);
+    values.storeCode = '01'
     }
     service.saveClient(values, productSelected)
 
@@ -128,6 +127,7 @@ const onFinish = (values) => {
     aux.products = []
     aux.products = wishList
     console.log(aux)
+    aux.storeCode = '01'
     service.saveClientWishLIst(aux)
 
     setResponseSentOrderWishList({
@@ -248,7 +248,14 @@ const onFinish = (values) => {
             setWishList(filterArray)
         }
     }
+    const openYapeModal = () => {
+        setOpenYapeModal(true)
+    }
+    const closeYapeModal = () => {
+        setOpenYapeModal(false)
+    }
     console.log(wishList, "wishList")
+    const handleCategory = () => {}
   return (
     <div className="App">
     <a href="tel:+51994381708" target="_blank" className="call-img">
@@ -263,7 +270,9 @@ const onFinish = (values) => {
                 <div className="container">
                     <div className="document gopro">
                         <div className="document__header">
-                            <h1 className="document__title">TUSACCESORIOS [PERU]</h1>
+                            <MenuComponent onClick={handleCategory}/>
+                            <img src="./images/logo-oficial.png" className="img-logo" />
+                            <h1 className="document__title">TIENDA ONLINE </h1>
                             <h2 className="document__subtitle">Encuentra diversos accesorios para tu cámara de acción</h2>
                         </div>
                         <div className="document__content card">
@@ -294,6 +303,9 @@ const onFinish = (values) => {
                                         </li>
                                         <li>
                                             <img src="./images/mscd.png" />
+                                        </li>
+                                        <li onClick={openYapeModal}>
+                                            <img src="./images/yape.png" style={{cursor: 'pointer'}}/>
                                         </li>
                                         </ul>
                                     </div>
@@ -334,6 +346,11 @@ const onFinish = (values) => {
             responseSentOrderWishList={responseSentOrderWishList}
             backToShopFromWishList={backToShopFromWishList}
             />
+            <Modal visible={yapeModal} onCancel={() => closeYapeModal()} width={240} cancelText="CERRAR"
+                okButtonProps={{hidden: true}} closable={true}
+            >
+                <img  src="./images/yape-modal.jpeg" className="yape-qr"/>
+            </Modal>
     </div>
   );
 }
