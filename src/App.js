@@ -16,6 +16,9 @@ firebase.initializeApp(config);
 const publicationRef = firebase.database();
 const ref =	publicationRef.ref('/');
 const refDashboard = publicationRef.ref('/products');
+const refDashboardClientsBD = publicationRef.ref('/');
+const refDashboardSales = publicationRef.ref('/sells');
+
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +31,7 @@ class App extends React.Component {
     <div>
         <Switch>
           <Route path="/dashboard">
-            <Dashboard reference={refDashboard}/>
+            <Dashboard reference={refDashboard} refClientsBD={refDashboardClientsBD} refDashboardSales={refDashboardSales} />
           </Route>
           <Route path="/epps">
             <EppsComponent reference={ref}/>

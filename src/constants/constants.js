@@ -187,6 +187,13 @@ export const AccesoriesGoPRo = [
     price: 160,
     img: './images/gopro/48_1.png',
     desc: 'Protector acuático para Gopro8, garantizará manipulación y protección al máximo bajo agua'
+  },
+  {
+    cod: 100028,
+    name: 'Arnés para casco de ciclismo',
+    price: 24,
+    img: './images/gopro/arnes_casco_ciclismo.png',
+    desc: 'Correa con soporte para cámara, incluye una correa adicional'
   }
 ];
 
@@ -423,4 +430,18 @@ export const ServicesStores = [
 export const USER_ADMIN = {
   username: 'eddev92',
   password: 'llancaharo1'
+}
+
+export const PAY_TYPES = {
+  yape: "1",
+  plin: "2",
+  bcp: "3",
+  bbva: "4",
+  ecommerce: "5"
+}
+
+export const DELIVERY_TYPES = {
+  atCity: "1",
+  outCity: "2",
+  office: "3"
 }

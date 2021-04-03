@@ -91,9 +91,14 @@ table#table-stock {
 }
 .card-all-stock .ant-card-body {
   padding: 15px !important;
+
 }
 .card-all-stock .ant-card-meta {
   text-align: center !important;
+}
+.modal-select-sale .ant-modal-body{
+  max-height: 500px;
+  overflow-y: auto;
 }
 @media (max-width:767px) {
   .card-real-estate .card-list {

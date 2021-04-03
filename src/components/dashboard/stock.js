@@ -3,13 +3,20 @@ import { Form, Input, Button, InputNumber, Card , Row, Col, Image, Tag, Space } 
 
 const { Meta } = Card;
 const StockView = ({ products = [], showProducts = () => {} }) => {
+  console.log(products)
+  let acumTotalAmount = 0;
+  let totalAmounts = []
+  totalAmounts = products && products.map(el => el.price * el.stock)
+  console.log(totalAmounts)
+  acumTotalAmount = (totalAmounts && totalAmounts.length) && totalAmounts.reduce((a,b) => a +b ) 
+  console.log(acumTotalAmount)
   return (
     <React.Fragment>
     <Row gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }}>
     <Col className="gutter-row">
     <div className="1 card-real-estate" onClick={() => showProducts()}>
       <div className="card_image">
-        <img src="https://i.redd.it/b3esnz5ra34y.jpg" className="img-responsive"/>
+        <img src="./images/btn-dashboard.jpg" className="img-responsive"/>
         <div className="card_title title-white">
             <p>PRODUCTOS </p>
           </div>
@@ -19,7 +26,7 @@ const StockView = ({ products = [], showProducts = () => {} }) => {
       <Col className="gutter-row">
       <div className="1 card-real-estate" onClick={() => showProducts()}>
       <div className="card_image">
-        <img src="https://i.redd.it/b3esnz5ra34y.jpg" className="img-responsive"/>
+        <img src="./images/btn-dashboard.jpg" className="img-responsive"/>
         <div className="card_title title-white">
             <p>AGREGAR </p>
           </div>
@@ -28,6 +35,8 @@ const StockView = ({ products = [], showProducts = () => {} }) => {
     </Col>
     </Row>
     <hr id="hr-stock" />
+    <Tag color="#f50">INVERSION </Tag>
+    <Tag color="#87d068">TOTAL INVENTARIO <br /><b>S/{acumTotalAmount && acumTotalAmount}</b></Tag>
     <Row gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }} id="row-all-stock">
     {
       products && products.map(el => {
@@ -48,14 +57,14 @@ const StockView = ({ products = [], showProducts = () => {} }) => {
               >
                 <Meta
               title={(el.name) && el.name.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ")}
-              description={`TOTAL... ${el.stock}`}
+              description={`CANTIDAD... ${el.stock} \b PRECIO... ${el.price}`}
             />
               <br></br>
               <table id="table-stock">
           <thead>
             <tr>
               <td>VENDIDOS</td>
-              <td>DISPONIBLE</td>
+              <td>STOCK</td>
             </tr>
           </thead>
             <tbody>
@@ -65,6 +74,7 @@ const StockView = ({ products = [], showProducts = () => {} }) => {
               </tr>
               </tbody>
               </table>
+              <br></br>
               <Button type="primary" size="large">AÑADIR</Button>
           </Card>
           </Col>

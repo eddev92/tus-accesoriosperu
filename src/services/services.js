@@ -42,10 +42,27 @@ class TusAccesoriosPeruServices {
         products.forEach(element => {
           return clientsRef.push(element);
         });
-      }
-      
+      }      
     }
 	}
+
+  loadSells = (element) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("sells");
+      if (element) {
+          return clientsRef.push(element);
+      }      
+    }
+  }
+  
+  loadClientsBD = (client) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("clientsBD");
+      if (client) {
+          return clientsRef.push(client);
+      }      
+    }
+  }
 }
 
 export default TusAccesoriosPeruServices;
