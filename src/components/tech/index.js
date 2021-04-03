@@ -258,7 +258,7 @@ console.log(wishList, "wishList")
 const handleCategory = () => {}
 return (
 <div className="App">
-                          <Alert message="Espacio tecnológico compartido por TUSACCESORIOS PERU" type="info" closable={false} onClick={() => window.location.href="/"} />
+    <Alert message="Espacio tecnológico de TUSACCESORIOS PERU" type="info" closable={false} onClick={() => window.location.href="/"} />
 <a href="tel:+51994381708" target="_blank" className="call-img">
     <img src="./images/logo-call.png" />
 </a>
@@ -273,8 +273,8 @@ return (
                     <div className="document__header">
                         <MenuComponent onClick={handleCategory}/>
                         <img src="./images/logo-oficial.png" className="img-logo" />
-                        <h1 className="document__title">TECNOLOGIA </h1>
-                        <h2 className="document__subtitle">Encuentra diversos productos tecnológicos al <b>MEJOR</b> precio</h2>
+                        <h1 className="document__title">VARIEDAD </h1>
+                        <h2 className="document__subtitle">Encuentra diversos productos al <b>MEJOR</b> precio</h2>
                     </div>
                     <div className="document__content card">
                         <div className="typography">
@@ -287,7 +287,7 @@ return (
                     </div>
                     <div className="document__footer">
                         <footer class="site-footer">
-                            <p><a mailto="ventas@starscorporation.pe">ventas@starscorporation.pe</a></p>
+                            {/* <p><a mailto="ventas@starscorporation.pe">ventas@starscorporation.pe</a></p> */}
                             <hr></hr>
                             <div class="container">
                                 <div class="row">

@@ -1,0 +1,103 @@
+.logo {
+  height: 120px;
+}
+.logo img {
+  width: 125px !important;
+  position: relative !important;
+    margin: 17px 30px !important;
+}
+
+.card-real-estate .cards-list {
+  z-index: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card-real-estate {
+  margin: 5px;
+  width: 220px;
+  height: auto;
+  border-radius: 40px;
+box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.card-real-estate .card_image {
+  width: inherit;
+  height: inherit;
+  border-radius: 40px;
+}
+
+.card-real-estate .card_image img {
+  width: 100%;
+  height: inherit;
+  border-radius: 40px;
+  object-fit: cover;
+}
+
+.card-real-estate .card_title {
+  text-align: center;
+  border-radius: 0px 0px 40px 40px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  margin-top: -80px;
+  height: 40px;
+}
+
+.card-real-estate:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+
+.card-real-estate .title-white {
+  color: white;
+}
+
+.card-real-estate .title-black {
+  color: black;
+}
+
+form#form-register-property {  
+  margin: 10% auto;
+}
+
+#btn-register {
+  background-color: #1FE42D;
+  border: 1px solid #1FE42D;
+}
+
+#row-all-stock {
+  margin-top: 60px;
+}
+
+.card-all-stock img {
+  width: 55px !important;
+  margin-top: 20px !important;
+}
+hr#hr-stock {
+  margin: 60px 0;
+  border: 1px solid black;
+}
+table#table-stock {
+  font-size: 0.8em;
+}
+.card-all-stock {
+  text-align: center;
+}
+.card-all-stock .ant-card-body {
+  padding: 15px !important;
+}
+.card-all-stock .ant-card-meta {
+  text-align: center !important;
+}
+@media (max-width:767px) {
+  .card-real-estate .card-list {
+    /* On small screens, we are no longer using row direction but column */
+    flex-direction: column;
+  }
+}

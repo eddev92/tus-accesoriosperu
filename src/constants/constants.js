@@ -65,21 +65,21 @@ export const AccesoriesGoPRo = [
   {
     cod: 100010,
     name: 'Brazo extensión largo',
-    price: 16,
+    price: 15,
     img: './images/gopro/brazo-largo.png',
     desc: 'Extensión de 5cm aprox para articulación y manipulación de camara'
   },
   {
     cod: 100011,
     name: 'Gancho standar',
-    price: 14,
+    price: 12,
     img: './images/gopro/gancho.png',
     desc: 'Gancho para base curvo o plana de alta resistencia'
   },
   {
     cod: 100012,
     name: 'Gancho J',
-    price: 17.50,
+    price: 16.50,
     img: './images/gopro/gancho-J.png',
     desc: 'Gancho con extensión de brazo corto incluida'
   },
@@ -156,7 +156,7 @@ export const AccesoriesGoPRo = [
   {
     cod: 100023,
     name: 'Adaptador para tabla de surf',
-    price: 85,
+    price: 65,
     img: './images/gopro/soporte_tabla.jpeg',
     desc: 'Frame protector básico para gopro session'
   },
@@ -179,6 +179,13 @@ export const AccesoriesGoPRo = [
     name: 'Case Acuático para Gopro Black 8',
     price: 120,
     img: './images/gopro/case-acuatico-gopro8.png',
+    desc: 'Protector acuático para Gopro8, garantizará manipulación y protección al máximo bajo agua'
+  },
+  {
+    cod: 100027,
+    name: 'Kit completo de 48 en 1',
+    price: 160,
+    img: './images/gopro/48_1.png',
     desc: 'Protector acuático para Gopro8, garantizará manipulación y protección al máximo bajo agua'
   }
 ];
@@ -260,3 +267,160 @@ export const TechnologyProducts = [
     desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
   }  
 ];
+
+export const EppsProducts = [
+  {
+    cod: 100001,
+    name: 'Guantes de nitrilo caña larga',
+    price: 22,
+    img: './images/epps/nitrilo.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100002,
+    name: 'Guantes de nitron',
+    price: 7,
+    img: './images/epps/nitron.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100003,
+    name: 'Guantes de badana',
+    price: 4,
+    img: './images/epps/badana.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100004,
+    name: 'Respirador 6200 3M',
+    price: 104,
+    img: './images/epps/6200.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100005,
+    name: 'Cartucho filtro 6003 para respirador 3M',
+    price: 57,
+    img: './images/epps/6003.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100006,
+    name: 'Chaleco de seguridad poliester liviano 40gr y 60gr',
+    price: 5,
+    img: './images/epps/chaleco_poliester.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100007,
+    name: 'Mamelucos descartables',
+    price: 25,
+    img: './images/epps/mamelucos.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  // {
+  //   cod: 100008,
+  //   name: 'cable acerado (tensor de acero) tipo BO',
+  //   price: 25,
+  //   img: './images/tech/cargador-iphone.png',
+  //   desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  // },
+  // {
+  //   cod: 100009,
+  //   name: 'templador de F° G° 5/8" pesado forjado',
+  //   price: 25,
+  //   img: './images/tech/cargador-iphone.png',
+  //   desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  // },
+  // {
+  //   cod: 100010,
+  //   name: 'templador de F° G° 1" pesado forjado',
+  //   price: 25,
+  //   img: './images/tech/cargador-iphone.png',
+  //   desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  // },
+  {
+    cod: 100010,
+    name: 'Mascarilla KN95',
+    price: 2.3,
+    img: './images/epps/kn95.jpg',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100011,
+    name: 'pintura epoxy en spray',
+    price: 48,
+    img: './images/epps/epoxi.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100012,
+    name: 'Protector facial',
+    price: 2.5,
+    img: './images/epps/facial.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  {
+    cod: 100013,
+    name: 'Precintos de seguridad para manometros y flujometros (MILLAR)',
+    price: 710,
+    img: './images/epps/precinto.png',
+    desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  },
+  // {
+  //   cod: 100014,
+  //   name: 'ROTULADO PERMANETE METALIZADO',
+  //   price: 25,
+  //   img: './images/tech/cargador-iphone.png',
+  //   desc: 'Pechera diseñada para deportes extremos con suma estabilidad y seguridad de filmación.'
+  // }
+]
+
+export const ServicesStores = [
+  {
+    id: '000001',
+    name: 'CHICKEN STAR',
+    slogan: 'Ya con tu gusto',
+    address: 'Av. Aviación , surquillo',
+    phone: '937663764',
+    mail: 'chickenstar@chicken.com',
+    logo: './images/services/chicken_star.jpg',
+    facebook: 'https://www.facebook.com/chickenstarpe'
+  },
+  {
+    id: '000002',
+    name: 'EL REY DEL SABOR',
+    slogan: 'Los más deliciosos pollos a la brasa, carnes y anticuchos a la parrilla',
+    address: 'sagitario, surco',
+    phone: '999999999',
+    mail: 'reydelsabor@correo.com',
+    logo: './images/services/rey_sabor.png',
+    facebook: 'https://www.facebook.com/elreydelsaboroficial'
+  },
+  {
+    id: '000003',
+    name: 'BLUE MAGIC',
+    slogan: 'Venta de jeans,zapatillas,novedades lo último en moda precio al por mayor y menor',
+    address: 'cerro centinela, surco',
+    phone: '994366209',
+    mail: 'Bluemagicperu10@gmail.com',
+    logo: './images/services/blue_magic.png',
+    facebook: 'https://www.facebook.com/bluemagic_oficial-104464734643423/'
+  },
+  {
+    id: '000004',
+    name: 'MACERADOS POLLITO',
+    slogan: 'Venta de macerados de diversos sabores a medida de tu gusto',
+    address: 'sagitario, surco',
+    phone: '902546186',
+    mail: 'pollito@pollito.com',
+    logo: './images/services/macerados_pollito.png',
+    facebook: 'https://www.facebook.com/bluemagic_oficial-104464734643423/'
+  }
+];
+
+// USER ADMIN
+export const USER_ADMIN = {
+  username: 'eddev92',
+  password: 'llancaharo1'
+}

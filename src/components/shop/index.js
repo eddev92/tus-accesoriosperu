@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Tooltip, Button, Modal, Menu, Switch  } from 'antd';
+import { Tooltip, Button, Modal, Form, Input  } from 'antd';
 import '../../App.css';
 import ModalComponent from '../../components/shared/modal';
 import ContentGoProShop from '../../components/shared/modal/content-modal';
 import { urlWhatsApp } from '../../constants/routes';
 import TusAccesoriosPeruServices from '../../services/services';
 import WishListModalComponent from '../shared/modal/wishlist-modal';
-import { AccesoriesGoPRo } from './../../constants/constants'
+import { AccesoriesGoPRo, USER_ADMIN } from './../../constants/constants'
 import MenuComponent from '../shared/menu';
+import Footer from '../shared/footer';
 
-const ShopComponent = ({reference}) => {
+const ShopComponent = ({reference, propsAux}) => {
     useEffect(() => {
         setTimeout(() => {
             setProductsInitial(AccesoriesGoPRo)
         }, 1200)
-    })
+
+        setTimeout(() => {
+           if (!initModal) setInitModal(true)
+        }, 350)
+    }, [])
   const finalOrderObj = {
     fullNames:'',
     dni: '',
@@ -43,6 +48,17 @@ const [responseSentOrderWishList, setResponseSentOrderWishList] = useState(null)
 
 const [yapeModal, setOpenYapeModal] = useState(false)
 
+const [initModal, setInitModal] = useState(false)
+
+const [modalLoginActive, setModalLoginActive] = useState(false)
+
+const closeInitModal = () => {
+    setInitModal(false)
+}
+
+const closeModalLogin = () => {
+    setModalLoginActive(false)
+}
 const openModal = (el) => {
   console.log('open modal', el)
   setProductSelected(el)
@@ -53,6 +69,11 @@ const openModalWishList = (el) => {
 //   setProductSelected(el)
   setOpenModalWishList(true)
 }
+
+const openModalLogin = () => {
+    setModalLoginActive(true)
+  }
+
 const closeModalWishList = () => {
     console.log('close modal wishlist')
     console.log(responseSentOrderWishList)
@@ -256,6 +277,31 @@ const onFinish = (values) => {
     }
     console.log(wishList, "wishList")
     const handleCategory = () => {}
+
+    // LOGIN
+    const layoutLogin = {
+        labelCol: { span: 8 },
+        wrapperCol: { span: 16 },
+      };
+      const tailLayoutLogin = {
+        wrapperCol: { offset: 8, span: 16 },
+      };
+      
+  
+        const onFinishLogin = (values) => {
+          console.log('Success:', values);
+          if (values) {
+              console.log(propsAux)
+              if (values.username === USER_ADMIN.username && values.password === USER_ADMIN.password && propsAux && propsAux.history) 
+              propsAux.history.push('/dashboard')
+              else
+                alert("USUARIO INVALIDO")
+          }
+        };
+      
+        const onFinishFailedLogin = (errorInfo) => {
+          console.log('Failed:', errorInfo);
+        };
   return (
     <div className="App">
     <a href="tel:+51994381708" target="_blank" className="call-img">
@@ -270,7 +316,7 @@ const onFinish = (values) => {
                 <div className="container">
                     <div className="document gopro">
                         <div className="document__header">
-                            <MenuComponent onClick={handleCategory}/>
+                            <MenuComponent onClick={handleCategory} handleLogin={openModalLogin} />
                             <img src="./images/logo-oficial.png" className="img-logo" />
                             <h1 className="document__title">TIENDA ONLINE </h1>
                             <h2 className="document__subtitle">Encuentra diversos accesorios para tu cámara de acción</h2>
@@ -284,36 +330,8 @@ const onFinish = (values) => {
                                 </div> */}
                             </div>
                         </div>
-                        <div className="document__footer">
-                            <footer class="site-footer">
-                                <p><a mailto="ventas@starscorporation.pe">ventas@starscorporation.pe</a></p>
-                                <hr></hr>
-                                <div class="container">
-                                    <div class="row">
-                                    <div class="col-md-8 col-sm-6 col-xs-12">
-                                        <p class="copyright-text">Copyright &copy; 2020 - 2021 Todos los derechos reservados por 
-                                    <a href="https://starscorporation.pe/" target="_blank"> Stars Corporation</a>
-                                        </p>
-                                    </div>
-
-                                    <div class="col-md-4 col-sm-6 col-xs-12 brands-payments">
-                                        <ul>
-                                        <li>
-                                            <img src="./images/visa.png" />
-                                        </li>
-                                        <li>
-                                            <img src="./images/mscd.png" />
-                                        </li>
-                                        <li onClick={openYapeModal}>
-                                            <img src="./images/yape.png" style={{cursor: 'pointer'}}/>
-                                        </li>
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                            </footer>
+                        <Footer openYapeModal={openYapeModal}/>
                         </div>
-                    </div>
                 </div>
             </div>
             <Button type="primary" onClick={openModalWishList} danger id="btn-wishlist" className={(wishList.length > 0 ) ? "active" : "desactive"}>
@@ -350,6 +368,50 @@ const onFinish = (values) => {
                 okButtonProps={{hidden: true}} closable={true}
             >
                 <img  src="./images/yape-modal.jpeg" className="yape-qr"/>
+            </Modal>
+            <Modal visible={initModal} onCancel={() => closeInitModal()} width={850} cancelText="CERRAR" style={{ top: 20 }}
+                okButtonProps={{hidden: true}} closable={true} cancelButtonProps={{hidden: 'hidden'}}
+            >
+                <div id="modal-init">
+                        {/* <div id="init-message">UNETE A NUESTRO GRUPO EN FACEBOOK Y ENTERATE DE LAS ULTIMAS NOVEDADES Y SORTEOS QUE TENEMOS PARA TI</div> */}
+                    <img src="./images/sorteo_abril.png" className="img-responsive" />
+                        {/* <Button ghost><a href="https://www.facebook.com/groups/1160131384409719/" target="_blank" >UNIRME</a></Button> */}
+                </div>
+            </Modal>
+            <Modal visible={modalLoginActive} onCancel={() => closeModalLogin()} width={450} cancelText="CERRAR" style={{ top: 20 }}
+                okButtonProps={{hidden: true}} closable={true} cancelButtonProps={{hidden: true}}
+            >
+                <div id="modal-login">
+                <Form
+                    {...layoutLogin}
+                    name="basic"
+                    initialValues={{ remember: true }}
+                    onFinish={onFinishLogin}
+                    onFinishFailed={onFinishFailedLogin}
+                    >
+                    <Form.Item
+                        label="Username"
+                        name="username"
+                        rules={[{ required: true, message: 'Please input your username!' }]}
+                    >
+                        <Input />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Password"
+                        name="password"
+                        rules={[{ required: true, message: 'Please input your password!' }]}
+                    >
+                        <Input.Password />
+                    </Form.Item>
+
+                    <Form.Item {...tailLayoutLogin}>
+                        <Button type="primary" htmlType="ENTRAR">
+                        Submit
+                        </Button>
+                    </Form.Item>
+                    </Form>
+                </div>
             </Modal>
     </div>
   );

@@ -9,6 +9,7 @@ import { BlackRampsProducts } from './../../constants/constants'
 import MenuComponent from '../shared/menu';
 import WishListBlackRampsModalComponent from '../shared/modal/wishlist-modal-blackramps';
 import BlackRampsModalComponent from '../shared/modal/blackramps';
+import Footer from '../shared/footer';
 // import IntroModalComponent from '../shared/modal/intro';
 
 
@@ -275,8 +276,7 @@ const handleCategory = () => {}
   return (
     
     <div className="App blackramps">
-                          <Alert message="Espacio dedicado a Blackramps, partner de TUSACCESORIOS PERU" type="info" closable={false} onClick={() => window.location.href="/"} />
-
+        <Alert message="Espacio dedicado a Blackramps, partner de TUSACCESORIOS PERU" type="info" closable={false} onClick={() => window.location.href="/"} />
     <a href="tel:+51994381708" target="_blank" className="call-img">
         <img src="./images/logo-call.png" />
     </a>
@@ -296,44 +296,14 @@ const handleCategory = () => {}
                         </div>
                         <div className="document__content card">
                             <div className="typography">
-                                <ContentGoProShop openModal={openModal} onChange={handleProduct} products={productsInitial} />
+                                <ContentGoProShop openModal={openModal} onChange={handleProduct} products={productsInitial} positionShop="02" />
 
                                 {/* <div className="document__signature">
                                     <AppImage src="/images/signature.jpg" width="160" height="55" />
                                 </div> */}
                             </div>
                         </div>
-                        <div className="document__footer">
-                            <footer class="site-footer">
-                                <p><a mailto="ventas@starscorporation.pe">ventas@starscorporation.pe</a></p>
-                                <hr></hr>
-                                <div class="container">
-                                    <div class="row">
-                                    <div class="col-md-8 col-sm-6 col-xs-12">
-                                        <p class="copyright-text">Copyright &copy; 2020 - 2021 Todos los derechos reservados por 
-                                    <a href="https://starscorporation.pe/" target="_blank"> Stars Corporation</a>
-                                        </p>
-                                    </div>
-
-                                    <div class="col-md-4 col-sm-6 col-xs-12 brands-payments">
-                                        <ul>
-                                        <li>
-                                            <img src="./images/visa.png" />
-                                        </li>
-                                        <li>
-                                            <img src="./images/mscd.png" />
-                                        </li>
-                                        {/* <li onClick={openYapeModal}>
-                                            <img src="./images/yape.png" style={{cursor: 'pointer'}}/>
-                                        </li> */}
-                                        </ul>
-                                    </div>
-                                    </div>
-                                </div>
-                            </footer>
-                        </div>
-
-
+                       <Footer openYapeModal={openYapeModal} />
                     </div>
 
                     </div>

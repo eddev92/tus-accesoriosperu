@@ -16,7 +16,7 @@ tailLayout, layout }) => {
           />
           <br></br>
           <Tag color="blue">
-          <a target="_blank" href="https://wa.me/51966774697">https://wa.me/51966774697</a>
+          <a target="_blank" href="https://wa.me/51994381708">https://wa.me/51994381708</a>
             </Tag>
             <br></br>
             <br></br>

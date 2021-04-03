@@ -33,6 +33,19 @@ class TusAccesoriosPeruServices {
       return clientsRef.push(order);
     }
 	}
+// ADMIN DASHBOARD
+
+  loadProducts = (products) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("products");
+      if (products) {
+        products.forEach(element => {
+          return clientsRef.push(element);
+        });
+      }
+      
+    }
+	}
 }
 
 export default TusAccesoriosPeruServices;

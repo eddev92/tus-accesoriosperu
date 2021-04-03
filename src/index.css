@@ -105,6 +105,7 @@ button#btn-wishlist.active {
   height: 35px;
   right: 0;
   margin: 10px;
+  top: 6%;
 }
 
 #menu-content li {

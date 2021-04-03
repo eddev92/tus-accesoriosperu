@@ -1,7 +1,7 @@
 // react,
 import React, { useState } from 'react';
 // application
-import { Card, Row, Col, Button, Checkbox } from 'antd';
+import { Card, Row, Col, Button, Checkbox, Image } from 'antd';
 // import url from '~/services/url';
 import { AccesoriesGoPRo } from '../../../constants/constants'
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
@@ -13,7 +13,7 @@ const gridStyle = {
   // margin: '14px',
 };
 const { Meta } = Card;
-function ContentGoProShop({ openModal = () => {}, onChange = () => {}, products = [], optionSize = null}) {
+function ContentGoProShop({ openModal = () => {}, onChange = () => {}, products = [], optionSize = null, positionShop = ''}) {
   // const openModal = (el: any) => {
   //   console.log('open modal', el)
   // }
@@ -24,24 +24,30 @@ function ContentGoProShop({ openModal = () => {}, onChange = () => {}, products 
           {
                           (products && products.length > 0) ? products.map(el => {
                             return (
-                              <Col className="gutter-row">
+                              <Col>
                                  <Card
                                     hoverable
                                     id="card-product"
                                     style={{ width: 300 }}
                                     cover={
-                                      <img
-                                        alt="example"
+                                      // <img
+                                      //   alt="example"
+                                      //   src={(el && el.img) && el.img}
+                                      //   className="img-responsive"
+                                      // />
+                                      <Image
+                                        width={200}
                                         src={(el && el.img) && el.img}
-                                        className="img-responsive"
-                                      />
+                                        className={(positionShop && positionShop === '02') ? 'blackramps-active img-responsive' : "normal img-responsive"}
+                                        placeholder="Cargando..."
+                                      />                                      
                                     }
                                     >
                                       <Checkbox onChange={onChange} value={el} >Agregar a la lista</Checkbox>
                                     <br></br>
                                     <br></br>
                                     <Meta
-                                      title={el.name && el.name.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ")}
+                                      title={(el.name) && el.name.replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ").replace("_", " ")}
                                       description={`Precio de...  S/ ${el.price}`}
                                     />
                                     <br></br>
