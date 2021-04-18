@@ -363,8 +363,38 @@ a.call-img img {
   background: transparent;
   margin: 8px;
 }
+.banner-scrolled {
+  height: 40px;
+  background: cornflowerblue;
+  margin-top: -40px;
+  transition: 0.3s
+}
+.banner-scrolled p {
+  position: relative;
+  color: white;
+  padding: 9px;
+  font-weight: 700;
+  font-size: 1.1em;  
+  animation: rightThenLeft 12.5s infinite alternate ease-in-out;
+  /* animation-name: run; */
+  /* animation-duration: 9s; */
+}
+@keyframes rightThenLeft {
+  from {
+    left: -90%;
+  }
+
+  to {
+    /* left: auto; */
+    left: 90%;
+  }
+}
 @media (max-width:767px)
 {
+  .banner-scrolled {
+    height: 85px !important;
+    margin-top: -90px !important;
+  }
   #modal-init button {
     bottom: 17% !important;
     right: 33% !important;

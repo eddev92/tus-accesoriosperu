@@ -432,16 +432,51 @@ export const USER_ADMIN = {
   password: 'llancaharo1'
 }
 
-export const PAY_TYPES = {
-  yape: "1",
-  plin: "2",
-  bcp: "3",
-  bbva: "4",
-  ecommerce: "5"
-}
+export const PAY_TYPES = [
+  {
+    label: "Yape",
+    value: 1,
+  },
+  {
+    label: "Plin",
+    value: 2,
+  },
+  {
+    label: "Deposito en BCP",
+    value: 3,
+  },
+  {
+    label: "Deposito en BBVA",
+    value: 4,
+  },
+  {
+    label: "Efectivo",
+    value: 5,
+  }
+]
 
-export const DELIVERY_TYPES = {
-  atCity: "1",
-  outCity: "2",
-  office: "3"
-}
+export const DELIVERY_TYPES = [
+  {
+    label: "En ciudad",
+    value: "1",
+  },
+  {
+    label: "Envío nacional",
+    value: "2",
+  },
+  {
+    label: "Recojo en tienda",
+    value: "3",
+  }
+]
+
+export const SALES_STATES = [
+  {
+    label: "Concretada",
+    value: 1
+  },
+  {
+    label: "Cancelada",
+    value: 2
+  }
+]

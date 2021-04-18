@@ -19,10 +19,11 @@ import TusAccesoriosPeruServices from '../../services/services';
 const { Header, Sider, Content } = Layout;
 let clientsAux = [];
 
-const Dashboard = ({ reference, refClientsBD, refDashboardSales }) => {
+const Dashboard = ({ reference, refClientsBD, refDashboardSales, refDashboarClients }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [handleOption, setHandleOPtion] = useState("1")
   const [listProducts, setListProducts] = useState([])
+  const [listAllClientsBD, setListAllClientsBD] = useState([])
   // useEffect(() => {
   //    console.log(listProducts, 'render!');
   //    setTimeout(() => {
@@ -30,13 +31,28 @@ const Dashboard = ({ reference, refClientsBD, refDashboardSales }) => {
   //    },150)
   // }, [])
   const getAllStockFirebase = () => {
+    let allIds = []
       let productsAux = []
       reference.on("value", (snapshot) => {
            if (snapshot.val() !== null) {
+            console.log("snapshot", snapshot)
+            snapshot.forEach(e => {
+              allIds.push(e.key)
+            })
+            console.log("allIds", allIds)
+            
              productsAux = Object.values(snapshot.val()) && Object.values(snapshot.val());
              productsAux = Object.values(productsAux)
-             setListProducts(productsAux)
+             productsAux = productsAux.map((e, index) => {
+               if (allIds.length) {
+                allIds.forEach(k => {
+                  e.keyBD = allIds[index]
+                })
+               }
+               return e
+             })
              console.log(productsAux, "productsAux")
+             setListProducts(productsAux)
            }
            return;
          }, (error) => {
@@ -45,6 +61,23 @@ const Dashboard = ({ reference, refClientsBD, refDashboardSales }) => {
   //     // }
   //   }
   }
+  const getAllClientsBDFirebase = () => {
+    let productsAux = []
+    refDashboarClients.on("value", (snapshot) => {
+         if (snapshot.val() !== null) {
+           productsAux = Object.values(snapshot.val()) && Object.values(snapshot.val());
+           productsAux = Object.values(productsAux)
+           setListAllClientsBD(productsAux)
+           console.log(productsAux, "productsAux")
+         }
+         return;
+       }, (error) => {
+         console.log("ERROR: " + error.code);
+       });
+//     // }
+//   }
+}
+if (handleOption === "1" && listProducts.length === 0) getAllStockFirebase()
   console.log(listProducts)
   // console.log(clientsAux)
   // if (list) {
@@ -52,70 +85,8 @@ const Dashboard = ({ reference, refClientsBD, refDashboardSales }) => {
         setCollapsed(!collapsed)
     };
     
-    const handleOptionUi = (option) => {
-      // const service = new TusAccesoriosPeruServices(refClientsBD);
-      // service.loadSells(
-      //   {
-      //     key: '1',
-      //     idSell: '0000001',
-      //     idClient: '1',
-      //     // name: 'Victor Villalobos Velarde',
-      //     // phone: "954517975",
-      //     // address: 'Tarapoto',
-      //     order: [
-      //       {
-      //         checked: true,
-      //         cod: 100003,
-      //         desc: "Soporte para superficies como el vidrio y sus variantes. Incluye sujetador de gancho",
-      //         img: "./images/gopro/chupon.png",
-      //         name: "Sujetador con chupón",
-      //         price: 30,
-      //         quantity: 1
-      //       },
-      //       {
-      //         checked: true,
-      //         cod: 100006,
-      //         desc: "Adhesivos por ambos lados para base curvo o plana",
-      //         img: "./images/gopro/pegatinas.png",
-      //         name: "Pegatinas",
-      //         price: 6,
-      //         quantity: 4
-      //       },
-      //       {
-      //         checked: true,
-      //         cod: 100007,
-      //         desc: "Base perfecta para superficies planas y de alta resistencia",
-      //         img: "./images/gopro/base-plana.png",
-      //         name: "Base plana para casco",
-      //         price: 12,
-      //         quantity: 2
-      //       },
-      //       {
-      //         checked: true,
-      //         cod: 100008,
-      //         desc: "Base perfecta para superficies curvas y de alta resistencia",
-      //         img: "./images/gopro/base-curvo.png",
-      //         name: "Base curvo para casco",
-      //         price: 16,
-      //         quantity: 2
-      //       },
-      //       {
-      //         checked: true,
-      //         cod: 100028,
-      //         desc: "Correa con soporte para cámara, incluye una correa adicional",
-      //         img: "./images/gopro/arnes_casco_ciclismo.png",
-      //         name: "Arnés para casco de ciclismo",
-      //         price: 24,
-      //         quantity: 2
-      //       }
-      //     ],
-      //     amount: 158,
-      //     payType: '4',
-      //     deliveryType: '2',
-      //     comment: "Se le obsequi 4 pegatinas, el monto final fue 140 con envío"
-          
-      //   }
-      // )
+    const handleOptionUi = (option) => {    
+      if (option === "2" || option === "3") getAllClientsBDFirebase()
       setHandleOPtion(option)
     };
     const showProducts = () => {
@@ -123,7 +94,14 @@ const Dashboard = ({ reference, refClientsBD, refDashboardSales }) => {
     }
     return (
       <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
+      <Sider trigger={null} collapsible collapsed={collapsed}
+       style={{
+        overflow: 'auto',
+        height: '100vh',
+        position: 'fixed',
+        left: 0,
+      }}
+      >
         <div className="logo">
         {!collapsed && <img src="./images/logo-oficial.png" className="img-logo" />}
         </div>
@@ -142,26 +120,23 @@ const Dashboard = ({ reference, refClientsBD, refDashboardSales }) => {
           </Menu.Item>
         </Menu>
       </Sider>
-      <Layout className="site-layout">
+      <Layout className="site-layout" style={{ marginLeft: 200 }}>
         <Header className="site-layout-background" style={{ padding: 0 }}>
-          {/* {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-            className: 'trigger',
-            onClick: toggle,
-          })} */}
           <a onClick={toggle}><UserOutlined /></a>
         </Header>
         <Content
           className="site-layout-background"
           style={{
             margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
+            overflow: 'initial'
           }}
         >
-          {handleOption === "1" && <StockView products={listProducts} showProducts={showProducts} /> }
-          {handleOption === "2" && <ClientsView products={[]} /> }
-          {handleOption === "3" && <SellsView reference={refDashboardSales} referenceAllStock={reference} /> }
+          <div className="site-layout-background" style={{ padding: 24}}>
+          {handleOption === "1" && <StockView products={listProducts} showProducts={showProducts} refSaveProducts={refClientsBD} /> }
+          {handleOption === "2" && <ClientsView clients={listAllClientsBD} /> }
+          {handleOption === "3" && <SellsView refClientsBD={refClientsBD} reference={refDashboardSales} refDashboarClients={refDashboarClients} referenceAllStock={reference} clients={listAllClientsBD} /> }
           {handleOption === "4" && <ProvidersView /> }
+          </div>
         </Content>
       </Layout>
     </Layout>

@@ -7,26 +7,7 @@ class TusAccesoriosPeruServices {
 		return clientsRef.child(client.id).remove();
   }
   
-	updateClientDB = (id, client) => {
-		const clientsRef = this.ref.child("clients");
-
-		return clientsRef.child(id).child('client').update(client);
-  }
   
-  saveClient = (order, productSelected) => {
-    if (this.ref) {
-      console.log(this.ref)
-    let newOrder = {}
-    newOrder = { ...order }
-    console.log(newOrder, "newOrder")
-    console.log(order)
-    newOrder.price = productSelected.price
-    console.log(productSelected)
-      const clientsRef = this.ref.child("clients");
-      return clientsRef.push(newOrder);
-    }
-	}
-
   saveClientWishLIst = (order) => {
     if (this.ref) {
       const clientsRef = this.ref.child("clients");
@@ -34,6 +15,29 @@ class TusAccesoriosPeruServices {
     }
 	}
 // ADMIN DASHBOARD
+
+updateStockDB = (id, product) => {
+  const aux = id && id.replace('IDSALE', '')
+  console.log(aux)
+  console.log(product)
+  const clientsRef = this.ref.child("products");
+
+  return clientsRef.child(aux).update(product);
+}
+updateStockDBfromWeb = (id, product) => {
+  const clientsRef = this.ref.child("products");
+
+  return clientsRef.child(id).update(product);
+}
+
+updateSaleDB = (id, sale) => {
+  const aux = id && id.replace('IDAUX', '')
+  console.log(aux)
+  console.log(sale)
+  const clientsRef = this.ref.child("sales");
+
+  return clientsRef.child(aux).update(sale);
+}
 
   loadProducts = (products) => {
     if (this.ref) {
@@ -48,7 +52,7 @@ class TusAccesoriosPeruServices {
 
   loadSells = (element) => {
     if (this.ref) {
-      const clientsRef = this.ref.child("sells");
+      const clientsRef = this.ref.child("sales");
       if (element) {
           return clientsRef.push(element);
       }      
@@ -63,6 +67,41 @@ class TusAccesoriosPeruServices {
       }      
     }
   }
+  
+  saveClientBD = (client) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("clientsBD");
+      return clientsRef.push(client);
+    }
+	}
+  
+  saveSaleBD = (sale) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("sales");
+      return clientsRef.push(sale);
+    }
+	}
+
+  saveProductBD = (product) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("products");
+      return clientsRef.push(product);
+    }
+	}
+  // saveClient = (order, productSelected) => {
+  //   if (this.ref) {
+  //     console.log(this.ref)
+  //   let newOrder = {}
+  //   newOrder = { ...order }
+  //   console.log(newOrder, "newOrder")
+  //   console.log(order)
+  //   newOrder.price = productSelected.price
+  //   console.log(productSelected)
+  //   console.log(newOrder, "newOrder")
+  //     // const clientsRef = this.ref.child("clients");
+  //     // return clientsRef.push(newOrder);
+  //   }
+	// }
 }
 
 export default TusAccesoriosPeruServices;

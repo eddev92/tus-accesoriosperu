@@ -10,16 +10,49 @@ import { AccesoriesGoPRo, USER_ADMIN } from './../../constants/constants'
 import MenuComponent from '../shared/menu';
 import Footer from '../shared/footer';
 
-const ShopComponent = ({reference, propsAux}) => {
+const ShopComponent = ({reference, propsAux, refDashboardProducts, refClientsBD}) => {
     useEffect(() => {
         setTimeout(() => {
-            setProductsInitial(AccesoriesGoPRo)
+            // setProductsInitial(AccesoriesGoPRo)
+            if (productsInitial.length < 1) getAllStockFirebase()
         }, 1200)
 
         setTimeout(() => {
            if (!initModal) setInitModal(true)
         }, 350)
     }, [])
+    
+    const getAllStockFirebase = () => {
+        let allIds = []
+          let productsAux = []
+          refDashboardProducts.on("value", (snapshot) => {
+               if (snapshot.val() !== null) {
+                console.log("snapshot", snapshot)
+                snapshot.forEach(e => {
+                  allIds.push(e.key)
+                })
+                console.log("allIds", allIds)
+                
+                 productsAux = Object.values(snapshot.val()) && Object.values(snapshot.val());
+                 productsAux = Object.values(productsAux)
+                 productsAux = productsAux.map((e, index) => {
+                   if (allIds.length) {
+                    allIds.forEach((k) => {
+                      e.keyBD = allIds[index]
+                    })
+                   }
+                   return e
+                 })
+                 console.log(productsAux, "productsAux")
+                 setProductsInitial(productsAux)
+               }
+               return;
+             }, (error) => {
+               console.log("ERROR: " + error.code);
+             });
+      //     // }
+      //   }
+      }
   const finalOrderObj = {
     fullNames:'',
     dni: '',
@@ -38,6 +71,11 @@ const [responseSentEmail, setResponseSentEmail] = useState(null)
 const [productSelected, setProductSelected] = useState(productSelectedInitial)
 const [finalOrder, setFinalOrder] = useState(finalOrderObj)
 const [productsInitial, setProductsInitial] = useState([])
+const [headerStyles, setHeaderStyles] = useState({
+    height: "40px",
+    background: "cornflowerblue",
+    marginTop: "-40px"
+})
 
 
 const [wishList, setWishList] = useState([])
@@ -60,12 +98,10 @@ const closeModalLogin = () => {
     setModalLoginActive(false)
 }
 const openModal = (el) => {
-  console.log('open modal', el)
   setProductSelected(el)
   setOpenModalUI(true)
 }
 const openModalWishList = (el) => {
-  console.log('open modal', el)
 //   setProductSelected(el)
   setOpenModalWishList(true)
 }
@@ -75,8 +111,6 @@ const openModalLogin = () => {
   }
 
 const closeModalWishList = () => {
-    console.log('close modal wishlist')
-    console.log(responseSentOrderWishList)
     setOpenModalWishList(false)
     setPayNowUI(false)
     if (responseSentOrderWishList && responseSentOrderWishList.data) {
@@ -99,46 +133,68 @@ const closeModal = () => {
     listInputs.forEach((el) => {
         const aux = document.querySelectorAll(`#${el}`)
         if (aux && aux[0] && aux[0].id === 'basic_quantityItems') {
-            console.log(aux[0])
             aux[0].value = 1
         }
         if (aux && aux[0]) {
-            console.log(aux[0])
             aux[0].value = ''
         }
     })
-    console.log('close modal')
     setOpenModalUI(false)
 
   setFinalOrder(finalOrderObj)
 }
 const onFinish = (values) => {
-    console.log(reference)
-    const service = new TusAccesoriosPeruServices(reference);
+    if (values && productSelected) {
+        const service = new TusAccesoriosPeruServices(reference);
 
-    if (values && values.quantityItems === undefined) {
-        values.quantityItems = 1
-    }
-    setFinalOrder(values)
-    console.log(values)
-    console.log(productSelected)
-    if (productSelected && productSelected.name) {
-        values.productSelected = productSelected.name
-    console.log('Success:', values);
-    values.storeCode = '01'
-    }
-    service.saveClient(values, productSelected)
-
-    setResponseSentEmail({
-        data: {
-            status: 200,
-            whatsAppMsg: urlWhatsApp(values)
+        if (values && values.quantityItems === undefined) {
+            values.quantityItems = 1
         }
-    })
+        setFinalOrder(values)
+        console.log(values)
+        console.log(productSelected)
+        if (productSelected && productSelected.name) {
+            values.productSelected = productSelected.name
+        values.storeCode = '01'
+        }
+        let auxProductSelected = { ...productSelected }
+
+        auxProductSelected.soldUnits = auxProductSelected.soldUnits + values.quantityItems
+        console.log(auxProductSelected)
+
+        const saleFromShop = {
+            address: values.address,
+            amount: productSelected.price * values.quantityItems,
+            comment: 'Venta desde la web',
+            delivertAmount: 0,
+            deliveryType: 0,
+            idClient: "0",
+            idSell: Math.floor(Math.random() * (1000000 - 10000)) + 100,
+            payType: '',
+            phone: values.phones,
+            products: [auxProductSelected],
+            reference: values.clientComment.comment,
+            state: 1
+        }
+        service.saveSaleBD(saleFromShop)
+        updateStockFromWeb(auxProductSelected)
+    
+        setResponseSentEmail({
+            data: {
+                status: 200,
+                whatsAppMsg: urlWhatsApp(values)
+            }
+        })
+    }   
   };
 
+  const updateStockFromWeb = (product) => {
+    const service = new TusAccesoriosPeruServices(refClientsBD);
+    service.updateStockDBfromWeb(product.keyBD, product)
+    
+  }
+
   const onFinishWishList = (values) => {
-    console.log(reference)
     const service = new TusAccesoriosPeruServices(reference);
 
     setFinalOrder(values)
@@ -147,9 +203,40 @@ const onFinish = (values) => {
     console.log(wishList)
     aux.products = []
     aux.products = wishList
+    // aux.storeCode = '01'
     console.log(aux)
-    aux.storeCode = '01'
-    service.saveClientWishLIst(aux)
+    let amout = wishList && wishList.map(e => e.price * e.quantity)
+    const acumAmount = amout && amout.reduce((a, b) => a +b )
+    let auxProducts = [ ...wishList ]
+    auxProducts = auxProducts && auxProducts.map(e => {
+        delete e.checked
+        e.quantitySelected = e.quantity
+        delete e.quantity
+        return e
+    })
+    console.log(auxProducts)
+    const sale = {
+        address: values.addressWishList,
+        amount: acumAmount,
+        comment: 'Venta desde la web',
+        delivertAmount: 0,
+        deliveryType: 0,
+        idClient: "0",
+        idSell: Math.floor(Math.random() * (1000000 - 10000)) + 100,
+        payType: 0,
+        phone: values.phonesWishList,
+        products: auxProducts,
+        reference: values.clientCommentWishList.comment,
+        state: 1
+    }
+    console.log(sale)
+    service.saveSaleBD(sale)
+    auxProducts && auxProducts.forEach(e => {
+        if (e.soldUnits === 0) e.soldUnits = e.quantitySelected
+        else e.soldUnits = e.soldUnits + e.quantitySelected
+        updateStockFromWeb(e)
+    })
+
 
     setResponseSentOrderWishList({
         data: {
@@ -215,18 +302,13 @@ const onFinish = (values) => {
         setWishList(aux)
         setProductsInitial([])
         setWishList([])
-        console.log(wishList)
     }
     const onChangeQuantity = (e, productSelected) => {
         let aux = [ ...wishList]
         if (e) {
-            console.log(e)
-            console.log(productSelected)
-            console.log(wishList)
             if (wishList) {
                 aux = aux.map(el => {
                     if (productSelected.cod === el.cod) {
-                        console.log(el)
                         el.quantity = e
                     }
                     return el
@@ -237,20 +319,15 @@ const onFinish = (values) => {
     }
     const setQuantity = (evt) => {
         if (evt) {
-            console.log(evt)
             seQquantitySelected(evt)
         }
     }
     const handleProduct = (e) => {
-        console.log(e)
         let auxList = [...wishList]
         let filterArray = []
         const auxProduct = { ...e.target.value}
-        console.log(e.target.checked)
-        console.log(e.target.value)
         if (e) {
             if (!e.target.checked) {
-                console.log("entro")
                 auxList = auxList.map((el, index) => {
                     if (el.cod === e.target.value.cod) {
                         el.checked = false
@@ -265,7 +342,6 @@ const onFinish = (values) => {
                 auxList.push(auxProduct)
             }
             auxList.forEach(e => {if (e && e.cod)filterArray.push(e)})
-            console.log(filterArray)
             setWishList(filterArray)
         }
     }
@@ -275,7 +351,7 @@ const onFinish = (values) => {
     const closeYapeModal = () => {
         setOpenYapeModal(false)
     }
-    console.log(wishList, "wishList")
+    console.log("productsInitial", productsInitial)
     const handleCategory = () => {}
 
     // LOGIN
@@ -302,6 +378,63 @@ const onFinish = (values) => {
         const onFinishFailedLogin = (errorInfo) => {
           console.log('Failed:', errorInfo);
         };
+        // SCROLL
+        const divHeader = document.querySelectorAll(".banner-scrolled")
+        const debounce = (fn) => {
+            let acum = 0
+
+            // This holds the requestAnimationFrame reference, so we can cancel it if we wish
+            let frame;
+          
+            // The debounce function returns a new function that can receive a variable number of arguments
+            return (...params) => {
+              
+              // If the frame variable has been defined, clear it now, and queue for next frame
+              if (frame) { 
+                cancelAnimationFrame(frame);
+              }
+          
+              // Queue our function call for the next frame
+              frame = requestAnimationFrame(() => {
+                
+                // Call our function and pass any params we received
+                fn(...params);
+              });
+          
+            } 
+          };
+          
+          
+          // Reads out the scroll position and stores it in the data attribute
+          // so we can use it in our stylesheets
+          const storeScroll = () => {
+            document.documentElement.dataset.scroll = window.scrollY;
+            console.log(window.scrollY)
+            console.log(divHeader)
+            // if (divHeader && divHeader.length > 0) {
+                if (window.scrollY >= 300) {
+                    const headerStylesAux = {
+                        height: "40px",
+                        background: "cornflowerblue",
+                        marginTop: "0"
+                    }
+                    // setHeaderStyles(headerStylesAux)
+                    if (divHeader && divHeader.length > 0) divHeader[0].style.marginTop = 0
+                    if (divHeader && divHeader.length > 0) divHeader[0].style.position = "fixed"
+                    if (divHeader && divHeader.length > 0) divHeader[0].style.width = "100%"
+                    if (divHeader && divHeader.length > 0) divHeader[0].style.zIndex = 99
+                } 
+                 if (window.scrollY <= 150) 
+                     if (divHeader && divHeader.length > 0) divHeader[0].style.marginTop = "-40px"
+            // }
+          }
+          
+          // Listen for new scroll events, here we debounce our `storeScroll` function
+          document.addEventListener('scroll', debounce(storeScroll), { passive: true });
+          
+          // Update scroll position for first time
+          
+    storeScroll();
   return (
     <div className="App">
     <a href="tel:+51994381708" target="_blank" className="call-img">
@@ -316,6 +449,9 @@ const onFinish = (values) => {
                 <div className="container">
                     <div className="document gopro">
                         <div className="document__header">
+                            <div className="banner-scrolled">
+                                <p>ENCUENTRA DIVERSOS PRODUCTOS AL MEJOR PRECIO!! SIGUENOS EN FACEBOOK COMO "Tus Accesorios Peru"</p>
+                            </div>
                             <MenuComponent onClick={handleCategory} handleLogin={openModalLogin} />
                             <img src="./images/logo-oficial.png" className="img-logo" />
                             <h1 className="document__title">TIENDA ONLINE </h1>
@@ -394,7 +530,7 @@ const onFinish = (values) => {
                         name="username"
                         rules={[{ required: true, message: 'Please input your username!' }]}
                     >
-                        <Input />
+                        <Input width="150px" />
                     </Form.Item>
 
                     <Form.Item
@@ -407,7 +543,7 @@ const onFinish = (values) => {
 
                     <Form.Item {...tailLayoutLogin}>
                         <Button type="primary" htmlType="ENTRAR">
-                        Submit
+                        INGRESAR
                         </Button>
                     </Form.Item>
                     </Form>

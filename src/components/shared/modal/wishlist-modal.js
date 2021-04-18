@@ -32,7 +32,8 @@ onFinishWishList = () => {}, onChangeQuantity = () => {}, quantityWishList = 1, 
       > 
              {/* // (!payNowUI) ? */}
              <div>
-        <table id="table-wishlist">
+        {
+          !responseSentOrderWishList && <table id="table-wishlist">
           <thead>
             <tr>
               {!payNowUI && <td>PRODUCTO</td>}
@@ -57,6 +58,7 @@ onFinishWishList = () => {}, onChangeQuantity = () => {}, quantityWishList = 1, 
               }
             </tbody>
           </table>
+}
           <br></br>
           {payNowUI && <PayNowWishListForm total={totalAmount} payNow={payFinishOrder} onFinish={onFinishWishList} responseSentOrderWishList={responseSentOrderWishList} backToShopFromWishList={backToShopFromWishList} />}
         </div>
