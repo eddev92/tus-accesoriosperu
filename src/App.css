@@ -375,7 +375,7 @@ a.call-img img {
   padding: 9px;
   font-weight: 700;
   font-size: 1.1em;  
-  animation: rightThenLeft 12.5s infinite alternate ease-in-out;
+  animation: rightThenLeft 18.5s infinite alternate ease-in-out;
   /* animation-name: run; */
   /* animation-duration: 9s; */
 }

@@ -18,7 +18,7 @@ const ShopComponent = ({reference, propsAux, refDashboardProducts, refClientsBD}
         }, 1200)
 
         setTimeout(() => {
-           if (!initModal) setInitModal(true)
+        //    if (!initModal) setInitModal(true)
         }, 350)
     }, [])
     
@@ -450,7 +450,7 @@ const onFinish = (values) => {
                     <div className="document gopro">
                         <div className="document__header">
                             <div className="banner-scrolled">
-                                <p>ENCUENTRA DIVERSOS PRODUCTOS AL MEJOR PRECIO!! SIGUENOS EN FACEBOOK COMO "Tus Accesorios Peru"</p>
+                                <p>ENCUENTRA DIVERSOS PRODUCTOS AL MEJOR PRECIO!! SIGUENOS EN FACEBOOK COMO "Tus Accesorios Perú"</p>
                             </div>
                             <MenuComponent onClick={handleCategory} handleLogin={openModalLogin} />
                             <img src="./images/logo-oficial.png" className="img-logo" />

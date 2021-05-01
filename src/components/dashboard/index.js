@@ -19,11 +19,12 @@ import TusAccesoriosPeruServices from '../../services/services';
 const { Header, Sider, Content } = Layout;
 let clientsAux = [];
 
-const Dashboard = ({ reference, refClientsBD, refDashboardSales, refDashboarClients }) => {
+const Dashboard = ({ reference, refClientsBD, refDashboardSales, refDashboarClients, refProviders, refProvidersBD }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [handleOption, setHandleOPtion] = useState("1")
   const [listProducts, setListProducts] = useState([])
   const [listAllClientsBD, setListAllClientsBD] = useState([])
+  const [listAllProvidersBD, setListAllProvidersBD] = useState([])
   // useEffect(() => {
   //    console.log(listProducts, 'render!');
   //    setTimeout(() => {
@@ -77,6 +78,35 @@ const Dashboard = ({ reference, refClientsBD, refDashboardSales, refDashboarClie
 //     // }
 //   }
 }
+const getAllProvidersBDFirebase = () => {
+  let providersAux = []
+  let allIds = []
+  refProvidersBD.on("value", (snapshot) => {
+       if (snapshot.val() !== null) {
+        snapshot.forEach(e => {
+          allIds.push(e.key)
+        })
+        console.log(allIds)
+         providersAux = Object.values(snapshot.val()) && Object.values(snapshot.val());
+         providersAux = Object.values(providersAux)
+         providersAux = providersAux.map((e, index) => {
+          if (allIds.length) {
+          allIds.forEach(k => {
+            e.keyBD = `IDPROVIDER${allIds[index]}`
+          })
+          }
+          return e
+        })
+         setListAllProvidersBD(providersAux)
+         console.log(providersAux, "providersAux")
+       }
+       return;
+     }, (error) => {
+       console.log("ERROR: " + error.code);
+     });
+//     // }
+//   }
+}
 if (handleOption === "1" && listProducts.length === 0) getAllStockFirebase()
   console.log(listProducts)
   // console.log(clientsAux)
@@ -87,6 +117,7 @@ if (handleOption === "1" && listProducts.length === 0) getAllStockFirebase()
     
     const handleOptionUi = (option) => {    
       if (option === "2" || option === "3") getAllClientsBDFirebase()
+      if (option === "4") getAllProvidersBDFirebase()
       setHandleOPtion(option)
     };
     const showProducts = () => {
@@ -133,9 +164,9 @@ if (handleOption === "1" && listProducts.length === 0) getAllStockFirebase()
         >
           <div className="site-layout-background" style={{ padding: 24}}>
           {handleOption === "1" && <StockView products={listProducts} showProducts={showProducts} refSaveProducts={refClientsBD} /> }
-          {handleOption === "2" && <ClientsView clients={listAllClientsBD} /> }
+          {handleOption === "2" && <ClientsView clients={listAllClientsBD} refClientsBD={refClientsBD} /> }
           {handleOption === "3" && <SellsView refClientsBD={refClientsBD} reference={refDashboardSales} refDashboarClients={refDashboarClients} referenceAllStock={reference} clients={listAllClientsBD} /> }
-          {handleOption === "4" && <ProvidersView /> }
+          {handleOption === "4" && <ProvidersView refClientsBD={refClientsBD} refProviders={refProviders} providers={listAllProvidersBD} /> }
           </div>
         </Content>
       </Layout>

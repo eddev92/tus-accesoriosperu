@@ -131,6 +131,7 @@ const SellsView = ({ reference, referenceAllStock, clients, refDashboarClients, 
                 e.keyBD = allIds[index]
               })
             }
+            e.quantitySelected = 0
             return e
           })
           console.log(productsAux, "productsAux")
@@ -266,18 +267,18 @@ const SellsView = ({ reference, referenceAllStock, clients, refDashboarClients, 
           el.keyBD = `IDSALE${el.keyBD}`
           delete el.confirmed;
           delete el.isSelected;
-          service.updateStockDB(el.keyBD, el)
           console.log(el)
+          // service.updateStockDB(el.keyBD, el)
           return el
         })
         if (values.deliveryAmount === 'undefined' || values.deliveryAmount === undefined) values.deliveryAmount = 0
         console.log('values after update:', values);
         values.state = 1
-          saveSaleBD(values)          
-        setShowAddSale(false)
-        setShowTableSells(true)
-        setProductsForSaleAdded([])
-        setClientSelected({})
+        //   saveSaleBD(values)          
+        // setShowAddSale(false)
+        // setShowTableSells(true)
+        // setProductsForSaleAdded([])
+        // setClientSelected({})
         }
         else {          
         console.log('values after update:', values);
@@ -420,6 +421,7 @@ const SellsView = ({ reference, referenceAllStock, clients, refDashboarClients, 
     console.log(saleSelected)
     
   console.log(listSales)
+  console.log(listProducts)
   // aux = aux && aux.map(e => {
   //   // e.products = (e && e.products.length > 0) && e.products.length
   //   return e

@@ -19,7 +19,8 @@ const refDashboard = publicationRef.ref('/products');
 const refDashboardClientsBD = publicationRef.ref('/');
 const refDashboardSales = publicationRef.ref('/sales');
 const refDashboarClients = publicationRef.ref('/clientsBD');
-
+const refProviders = publicationRef.ref("/");
+const refProvidersBD = publicationRef.ref("/providersBD");
 
 class App extends React.Component {
   constructor(props) {
@@ -35,7 +36,10 @@ class App extends React.Component {
             <Dashboard 
             reference={refDashboard} 
             refClientsBD={refDashboardClientsBD}
-            refDashboardSales={refDashboardSales} refDashboarClients={refDashboarClients} />
+            refDashboardSales={refDashboardSales} refDashboarClients={refDashboarClients} 
+            refProviders={refProviders}
+            refProvidersBD={refProvidersBD}
+            />
           </Route>
           <Route path="/epps">
             <EppsComponent reference={ref}/>

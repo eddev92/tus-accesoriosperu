@@ -75,6 +75,13 @@ updateSaleDB = (id, sale) => {
     }
 	}
   
+  saveProviderBD = (provider) => {
+    if (this.ref) {
+      const clientsRef = this.ref.child("providersBD");
+      return clientsRef.push(provider);
+    }
+	}
+
   saveSaleBD = (sale) => {
     if (this.ref) {
       const clientsRef = this.ref.child("sales");
