@@ -7,4 +7,5 @@ const config = {
   appId: "1:520375541138:web:85796a38f3e3be14fa354b",
   measurementId: "G-G1276YGFJ4"
 }
+
 export default config;

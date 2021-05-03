@@ -3,7 +3,6 @@ import { Form, Input, Button, InputNumber, Card , Row, Col, Image, Tag, Upload }
 import { PlusOutlined } from '@ant-design/icons';
 import TusAccesoriosPeruServices from '../../services/services';
 
-
 const layout = {
   labelCol: {
     span: 8,
@@ -14,11 +13,12 @@ const layout = {
 };
 
 const { Meta } = Card;
-const StockView = ({ products = [], showProducts = () => {}, refSaveProducts }) => {
+const StockView = ({ refDashboardProducts, products = [], showProducts = () => {}, refSaveProducts, publicationRef, storage }) => {
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [showAllProducts, setShowAllroducts] = useState(false);
   const [fileList, setFileList] = useState([])
   const [previewVisible, setPreviewVisible] = useState(false)
+  const [urlProductAdded, setUrlProductAdded] = useState(null)
   console.log(products)
   let acumTotalAmount = 0;
   let totalAmounts = []
@@ -43,7 +43,7 @@ const StockView = ({ products = [], showProducts = () => {}, refSaveProducts }) 
       const service = new TusAccesoriosPeruServices(refSaveProducts)
 
       values.soldUnits = 0
-      values.img = "./images/gopro/48_1.png"
+      values.img = urlProductAdded || ''
       values.cod = products[products.length - 1] && products[products.length - 1].cod + 1
       console.log(products)
       console.log(values)
@@ -65,29 +65,27 @@ const StockView = ({ products = [], showProducts = () => {}, refSaveProducts }) 
     });
   }
   const handleCancel = () => setPreviewVisible(false)
-  const handleChange = ({fileList}) => {
-    let resultAux = null
-    if (fileList) {
-      setFileList(fileList)
-      const result = getBase64(fileList[0].originFileObj)
-      if (result) {
-        console.log(result)
-        const formData = new FormData()
-        fileList.forEach((file, i) => {
-          formData.append(i, file)
-        })
-        result.then(response => resultAux = response)
-        fetch(`http://grupoinversionistalinus.com/public_html/tusaccesoriosperu.com/images/gopro`, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          body: resultAux
-        })
-        .then(res => res.json())
+  const handleChange = (e) => {
+    console.log(e.fileList)
+    if (e && e.target) {
+      const reader = new FileReader();
+      let file = e.target.files[0]; // get the supplied file
+      // if there is a file, set image to that file
+      if (file) {
+        console.log(file)
+        uploadImage(file)
+        // console.log(reader)
+        // reader.onload = () => {
+        //   console.log(reader)
+        //   if (reader.readyState === 2) {
+        //     console.log(file);
+        //     uploadImage(file)
+        //   }
+        // };
+        // reader.readAsDataURL(e.target.files[0]);
+      // if there is no file, set image back to null
       }
-    }
+    }    
   }
   const handlePreview = async file => {
     if (!file.url && !file.preview) {
@@ -100,12 +98,45 @@ const StockView = ({ products = [], showProducts = () => {}, refSaveProducts }) 
     //   previewTitle: file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
     // });
   };
-  const uploadButton = (
-    <div>
-      <PlusOutlined />
-      <div style={{ marginTop: 8 }}>Upload</div>
-    </div>
-  );
+  const uploadImage = (image) => {
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+           console.log(url)
+           setUrlProductAdded(url)
+          });
+      }
+    );
+    // console.log(image,"cargar foto ")
+    // console.log(refDashboardProducts, "cargar foto ")
+    // if (refDashboardProducts) {
+    //   const storageRef = storage.ref();
+    //   //3.
+    //    const imageRef = storageRef.child(image.name);
+    //   //4.
+    //   // console.log(imageRef)
+    //   imageRef.put(image)
+    //  //5.
+    //  .then(() => {
+    //     alert("Image uploaded successfully to Firebase.");
+    // });
+    // }
+    
+  }
   return (
     <React.Fragment>
     <Row gutter={{ xs: 16, sm: 16, md: 24, lg: 32 }}>
@@ -134,6 +165,9 @@ const StockView = ({ products = [], showProducts = () => {}, refSaveProducts }) 
     {
       showAddProduct &&
       <div>
+        {/* <button onClick={() => uploadImage()}>
+          Cargar foto
+        </button> */}
         <Form
       {...layout}
       name="basic"
@@ -150,15 +184,16 @@ const StockView = ({ products = [], showProducts = () => {}, refSaveProducts }) 
           <Input style={{ width: 320 }} />
         </Form.Item>
 
-        <Upload
+        {/* <Upload
           listType="picture-card"
           fileList={fileList}
           onPreview={handlePreview}
           onChange={handleChange}
+          accept="image/x-png,image/jpeg"
         >
           {fileList.length >= 8 ? null : uploadButton}
-        </Upload>
-
+        </Upload> */}
+          <input type="file" onChange={handleChange} accept="image/x-png,image/jpeg" />
         <Form.Item
           label="Descripción"
           name="desc"

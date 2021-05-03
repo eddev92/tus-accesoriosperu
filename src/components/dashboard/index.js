@@ -19,7 +19,7 @@ import TusAccesoriosPeruServices from '../../services/services';
 const { Header, Sider, Content } = Layout;
 let clientsAux = [];
 
-const Dashboard = ({ reference, refClientsBD, refDashboardSales, refDashboarClients, refProviders, refProvidersBD }) => {
+const Dashboard = ({ refDashboardProducts, refClientsBD, refDashboardSales, refDashboarClients, refProviders, refProvidersBD, publicationRef, storage }) => {
   const [collapsed, setCollapsed] = useState(false)
   const [handleOption, setHandleOPtion] = useState("1")
   const [listProducts, setListProducts] = useState([])
@@ -34,7 +34,7 @@ const Dashboard = ({ reference, refClientsBD, refDashboardSales, refDashboarClie
   const getAllStockFirebase = () => {
     let allIds = []
       let productsAux = []
-      reference.on("value", (snapshot) => {
+      refDashboardProducts.on("value", (snapshot) => {
            if (snapshot.val() !== null) {
             console.log("snapshot", snapshot)
             snapshot.forEach(e => {
@@ -151,7 +151,7 @@ if (handleOption === "1" && listProducts.length === 0) getAllStockFirebase()
           </Menu.Item>
         </Menu>
       </Sider>
-      <Layout className="site-layout" style={{ marginLeft: 200 }}>
+      <Layout className="site-layout" style={{ marginLeft: collapsed ? 80 : 200 }}>
         <Header className="site-layout-background" style={{ padding: 0 }}>
           <a onClick={toggle}><UserOutlined /></a>
         </Header>
@@ -163,9 +163,9 @@ if (handleOption === "1" && listProducts.length === 0) getAllStockFirebase()
           }}
         >
           <div className="site-layout-background" style={{ padding: 24}}>
-          {handleOption === "1" && <StockView products={listProducts} showProducts={showProducts} refSaveProducts={refClientsBD} /> }
+          {handleOption === "1" && <StockView storage={storage} refDashboardProducts={refDashboardProducts} products={listProducts} showProducts={showProducts} refSaveProducts={refClientsBD} publicationRef={publicationRef}/> }
           {handleOption === "2" && <ClientsView clients={listAllClientsBD} refClientsBD={refClientsBD} /> }
-          {handleOption === "3" && <SellsView refClientsBD={refClientsBD} reference={refDashboardSales} refDashboarClients={refDashboarClients} referenceAllStock={reference} clients={listAllClientsBD} /> }
+          {handleOption === "3" && <SellsView refClientsBD={refClientsBD} reference={refDashboardSales} refDashboarClients={refDashboarClients} referenceAllStock={refDashboardProducts} clients={listAllClientsBD} /> }
           {handleOption === "4" && <ProvidersView refClientsBD={refClientsBD} refProviders={refProviders} providers={listAllProvidersBD} /> }
           </div>
         </Content>
