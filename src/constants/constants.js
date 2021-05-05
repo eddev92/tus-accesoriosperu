@@ -383,9 +383,19 @@ export const EppsProducts = [
   // }
 ]
 
-export const ServicesStores = [
+export const ServicesStores = [  
   {
     id: '000001',
+    name: 'YRENE RESTAURANTE',
+    slogan: 'Restaurante peruano. Streetfood sabrosa!!',
+    address: 'sAv Revolución 2399, Villa el Salvador',
+    phone: '927772796',
+    mail: 'yrenerestauranteperu@gmail.com',
+    logo: './images/services/yrene.png',
+    facebook: 'https://www.facebook.com/YreneStreetfood'
+  },
+  {
+    id: '000002',
     name: 'CHICKEN STAR',
     slogan: 'Ya con tu gusto',
     address: 'Av. Aviación , surquillo',
@@ -395,7 +405,7 @@ export const ServicesStores = [
     facebook: 'https://www.facebook.com/chickenstarpe'
   },
   {
-    id: '000002',
+    id: '000003',
     name: 'EL REY DEL SABOR',
     slogan: 'Los más deliciosos pollos a la brasa, carnes y anticuchos a la parrilla',
     address: 'sagitario, surco',
@@ -405,7 +415,7 @@ export const ServicesStores = [
     facebook: 'https://www.facebook.com/elreydelsaboroficial'
   },
   {
-    id: '000003',
+    id: '000004',
     name: 'BLUE MAGIC',
     slogan: 'Venta de jeans,zapatillas,novedades lo último en moda precio al por mayor y menor',
     address: 'cerro centinela, surco',
@@ -415,7 +425,7 @@ export const ServicesStores = [
     facebook: 'https://www.facebook.com/bluemagic_oficial-104464734643423/'
   },
   {
-    id: '000004',
+    id: '000005',
     name: 'MACERADOS POLLITO',
     slogan: 'Venta de macerados de diversos sabores a medida de tu gusto',
     address: 'sagitario, surco',
